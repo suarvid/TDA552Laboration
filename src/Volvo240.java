@@ -34,7 +34,7 @@ public class Volvo240 extends Car {
     /**
      * @return speedFactor to calc new speed with, depends on the cars trimFactor
      */
-    @Override
+
     public double speedFactor() {
         return this.getEnginePower() * 0.01 * trimFactor;
     }
