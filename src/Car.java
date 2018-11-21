@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 
-public abstract class Car implements Movable {
+public class Car implements Movable {
 
     public enum Directions {LEFT, RIGHT, UP, DOWN}
 
@@ -32,13 +32,13 @@ public abstract class Car implements Movable {
      * @param nrDoors number of doors on the Car.
      * @param color color of the Car.
      * @param enginePower maximum speed of the Car.
-     * @param modelname name of the Car model.
+     * @param modelName name of the Car model.
      */
-    public Car(int nrDoors, Color color, double enginePower, String modelname) {
+     Car(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
-        this.modelname = modelname;
+        this.modelname = modelName;
     }
 
 
@@ -111,7 +111,7 @@ public abstract class Car implements Movable {
      */
 
     public void startEngine() {
-        if (engineOn == false) {
+        if (!engineOn) {
             currentSpeed = 0.1;
             engineOn = true;
         }
@@ -123,6 +123,11 @@ public abstract class Car implements Movable {
 
     public void printPosition() {
         System.out.println("Car is at position: " + "x: " + x + ", y: " + y);
+    }
+
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -216,7 +221,9 @@ public abstract class Car implements Movable {
 
     }
 
-    protected abstract double speedFactor();
+    private double speedFactor() {
+        return 1;
+    }
 
     /**
      * Increments speed by given amount
@@ -271,5 +278,9 @@ public abstract class Car implements Movable {
         if (0 < amount) {
             decrementSpeed(amount);
         }
+    }
+
+    public boolean isMoving() {
+        return currentSpeed > 0;
     }
 }

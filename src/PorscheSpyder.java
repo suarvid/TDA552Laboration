@@ -28,7 +28,6 @@ public class PorscheSpyder extends Car{
      * @return speedFactor which is used to increase speed, factor depends on number of spyders that have been created.
      */
 
-    @Override
     public double speedFactor(){
         return this.getEnginePower() * 0.01 * spydersCreated;
     }
