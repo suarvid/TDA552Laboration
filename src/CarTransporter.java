@@ -143,6 +143,10 @@ public class CarTransporter extends Car implements Loadable<Car> {
         return (getEnginePower() / getTotalWeight()) * 50;
     }
 
+    /**
+     * @return Boolean representing if CarTransporters ramp is raised.
+     */
+
     public boolean isRampRaised() {
         return rampRaised;
     }
