@@ -12,7 +12,7 @@ public class DriveCar {
         ferry.move();
         ferry.move();
         ferry.printPosition();
-        transporter.printPosition();
+        //transporter.printPosition();
 
 
     }
