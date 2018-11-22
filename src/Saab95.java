@@ -19,12 +19,13 @@ public class Saab95 extends Car {
 
     /**
      * Takes two in-parameters, and passes some class-specific values to super-constructor
-     * @param color color of the Saab95.
+     *
+     * @param color       color of the Saab95.
      * @param enginePower maximum speed of the Saab95.
      */
 
     public Saab95(Color color, double enginePower) {
-        super(4, color, enginePower, "Saab95");
+        super(4, color, enginePower, "Saab95", 1600);
         saab95sCreated++;
         id = saab95sCreated;
     }

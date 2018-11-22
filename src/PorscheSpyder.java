@@ -17,7 +17,7 @@ public class PorscheSpyder extends Car{
     private long id;
 
     public PorscheSpyder(Color color, int enginePower) {
-        super(numOfDoors, color, enginePower, "PorscheSpyder");
+        super(numOfDoors, color, enginePower, "PorscheSpyder",1400);
         spydersCreated++;
         id = spydersCreated;
     }

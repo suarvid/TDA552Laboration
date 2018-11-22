@@ -1,16 +1,20 @@
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 
 public class CarTransporter implements Loadable, Movable {
 
     private static final int loadCapacity = 10;
+    private static final int maxCarWeight = 2500;
 
-    private Car car;
+    private final Car car;
     private boolean rampRaised;
-    private final ArrayList<Car> loadedCars = new ArrayList<>();
+    private final Deque<Car> loadedCars = new ArrayDeque<>();
 
     public CarTransporter(int nrDoors, Color color, double enginePower) {
-        car = new Car(nrDoors, color, enginePower, "Transporter of Cars");
+        car = new Car(nrDoors, color, enginePower, "Transporter of Cars", 10000);
         rampRaised = true;
     }
 
@@ -58,6 +62,9 @@ public class CarTransporter implements Loadable, Movable {
     public void move() {
         if (rampRaised) {
             car.move();
+            for (Car loadedcar : loadedCars) {
+                loadedcar.setPosition(car.getX(), car.getY());
+            }
         } else {
             System.out.println("Raise the ramp before driving!");
         }
@@ -75,30 +82,40 @@ public class CarTransporter implements Loadable, Movable {
 
         } else if (loadedCars.size() == loadCapacity) {
             System.out.println("Car Transporter is loaded to the max! Cannot load more Cars!");
-        } else if (!carToLoad.equals(car)) {
+        } else if (!carToLoad.equals(car) && carToLoad.getTotalWeight() <= maxCarWeight) {
             loadedCars.add(carToLoad);
+            car.setTotalWeight(car.getTotalWeight() + carToLoad.getTotalWeight());
             carToLoad.setPosition(car.getX(), car.getY());
         }
 
     }
 
-    public void unload(int cars) {
+    public Deque<Car> getLoadedCars() {
+        return loadedCars;
+    }
+
+    public void unload() {
+        loadedCars.pop();
 
     }
 
-    /*private boolean isMoving() {
-        return car.getCurrentSpeed() > 0;
-    }*/
+    public void unloadAll() {
+        while (!loadedCars.isEmpty()) {
+            loadedCars.pop();
+        }
+    }
+
+    private void isMoving() {
+        car.isMoving();
+    }
 
 
     public boolean isFull() {
-        //TODO Implement
-        return true;
+        return loadedCars.size() == loadCapacity;
     }
 
     public double speedFactor() {
-        //TODO Implement
-        return 0.0;
+        return (car.getEnginePower()/car.getTotalWeight()) * 50;
     }
 
 }

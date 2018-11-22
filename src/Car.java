@@ -20,6 +20,7 @@ public class Car implements Movable {
     private int nrDoors;
     private Color color;
     private double enginePower;
+    private int totalWeight;
     private double currentSpeed;
     private Directions direction = Directions.UP;
     private double x;
@@ -34,11 +35,19 @@ public class Car implements Movable {
      * @param enginePower maximum speed of the Car.
      * @param modelName name of the Car model.
      */
-     Car(int nrDoors, Color color, double enginePower, String modelName) {
+     Car(int nrDoors, Color color, double enginePower, String modelName, int totalWeight) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelname = modelName;
+        this.totalWeight = totalWeight;
+    }
+
+    public int getTotalWeight() {
+        return totalWeight;
+    }
+    public void setTotalWeight(int weight){
+         this.totalWeight = weight;
     }
 
 
@@ -122,7 +131,7 @@ public class Car implements Movable {
      */
 
     public void printPosition() {
-        System.out.println("Car is at position: " + "x: " + x + ", y: " + y);
+        System.out.println(modelname+" is at position: " + "x: " + x + ", y: " + y);
     }
 
     public void setPosition(double x, double y) {
@@ -142,7 +151,7 @@ public class Car implements Movable {
      */
 
     public void stopEngine() {
-        while (currentSpeed > 0) {
+        while (isMoving()) {
             decrementSpeed(10);
         }
         engineOn = false;
@@ -221,9 +230,10 @@ public class Car implements Movable {
 
     }
 
-    private double speedFactor() {
+    public double speedFactor() {
         return 1;
     }
+
 
     /**
      * Increments speed by given amount
@@ -282,5 +292,8 @@ public class Car implements Movable {
 
     public boolean isMoving() {
         return currentSpeed > 0;
+    }
+    public void printCurrentSpeed(){
+        System.out.println(currentSpeed);
     }
 }
