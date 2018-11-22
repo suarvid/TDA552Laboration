@@ -128,7 +128,7 @@ public abstract class Car extends Vehicle implements Movable {
      * @param amount of increase in speed
      */
 
-    public void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
         if (getCurrentSpeed() > enginePower) {
             setCurrentSpeed (enginePower);
@@ -141,7 +141,7 @@ public abstract class Car extends Vehicle implements Movable {
      * @param amount of decrease in speed
      */
 
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
         if (getCurrentSpeed() < 0) {
             setCurrentSpeed (0);

@@ -10,7 +10,7 @@ public class CarLoader {
     private final int maxLoadWeight;
     private final LinkedList<Car> loadedCars = new LinkedList<>();
 
-    public CarLoader(int maxNrCars, int maxCarWeight, int maxLoadWeight) {
+    CarLoader(int maxNrCars, int maxCarWeight, int maxLoadWeight) {
         this.maxNrCars = maxNrCars;
         this.maxCarWeight = maxCarWeight;
         this.maxLoadWeight = maxLoadWeight;
@@ -29,6 +29,7 @@ public class CarLoader {
         } else {
             loadedCars.add(carToLoad);
             currentLoadWeight += carToLoad.getTotalWeight();
+            currentLoader.setTotalWeight(currentLoader.getTotalWeight() + carToLoad.getTotalWeight());
             carToLoad.setPosition(currentLoader.getX(), currentLoader.getY());
         }
     }
@@ -37,9 +38,11 @@ public class CarLoader {
         return !((Math.abs(carToLoad.getX() - loaderX) > 1) || Math.abs(carToLoad.getY() - loaderY) > 1);
     }
 
-    public void unload(Car carToUnload) {
+    public void unload(Car carToUnload, Vehicle currentLoader) {
         try {
             loadedCars.remove(carToUnload);
+            currentLoadWeight -= carToUnload.getTotalWeight();
+            currentLoader.setTotalWeight(currentLoader.getTotalWeight() - carToUnload.getTotalWeight());
         } catch (NullPointerException eNullPoint) {
             System.out.println("Loader is already empty, cannot unload!");
         }

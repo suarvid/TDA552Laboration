@@ -28,17 +28,17 @@ public class Ferry extends Vehicle {
         carLoader.load(carToLoad, this);
     }
 
-    @Override
+
     public void decrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() - amount * (enginePower/10000));
     }
-    @Override
+
     public void incrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() + amount * (enginePower/10000));
     }
 
     public void unload() {
-        carLoader.unload(carLoader.getLoadedCars().getFirst());
+        carLoader.unload(carLoader.getLoadedCars().getFirst(), this);
     }
 
     public void unloadAll() {

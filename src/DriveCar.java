@@ -27,6 +27,14 @@ public class DriveCar {
         cars.add(greenSaab);
 
 
+        CarTransporter carTransporter = new CarTransporter(2,Color.MAGENTA,100,"Transp",0,0);
+        carTransporter.lowerRamp();
+        carTransporter.load(carTransporter);
+        System.out.println(carTransporter.getLoadedCars());
+
+        carTransporter.load(redSaab);
+        carTransporter.load(greenVolvo);
+
 
     }
 }

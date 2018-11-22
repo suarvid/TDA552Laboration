@@ -4,13 +4,12 @@ import java.util.Queue;
 public class CarTransporter extends Car {
 
 
-    private final CarLoader carLoader = new CarLoader(15, 10000, 50000);
-
+    private final CarLoader carLoader = new CarLoader(15, 3000, 50000);
 
     private boolean rampRaised;
 
-    public CarTransporter(int nrDoors, Color color, double enginePower, String modelName, int totalWeight, double x, double y) {
-        super(nrDoors, color, enginePower, modelName, totalWeight, x, y);
+    public CarTransporter(int nrDoors, Color color, double enginePower, String modelName, double x, double y) {
+        super(nrDoors, color, enginePower, modelName, 7000, x, y);
         rampRaised = true;
     }
 
@@ -32,18 +31,35 @@ public class CarTransporter extends Car {
     }
 
     public void load(Car carToLoad) {
-        carLoader.load(carToLoad, this);
+        if (!rampRaised && carToLoad != this) {
+            carLoader.load(carToLoad, this);
+        }
     }
 
     public void unload() {
-        carLoader.unload(carLoader.getLoadedCars().getLast());
+        Car carToUnload = carLoader.getLoadedCars().getLast();
+        carLoader.unload(carToUnload, this);
+        switch (getDirection()) {
+            case UP:
+                carToUnload.setPosition(getX(), getY() + 0.5);
+                break;
+            case DOWN:
+                carToUnload.setPosition(getX(), getY() - 0.5);
+                break;
+            case RIGHT:
+                carToUnload.setPosition(getX() - 0.5, getY());
+                break;
+            case LEFT:
+                carToUnload.setPosition(getX() + 0.5, getY());
+                break;
+        }
     }
 
     public void move() {
         if (rampRaised) {
             super.move();
-            for (Car loadedcar : carLoader.getLoadedCars()) {
-                loadedcar.setPosition(getX(), getY());
+            for (Car loadedCar : carLoader.getLoadedCars()) {
+                loadedCar.setPosition(getX(), getY());
             }
         } else {
             System.out.println("Raise the ramp before driving!");
