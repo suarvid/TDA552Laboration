@@ -12,13 +12,13 @@ public class CarTransporter extends Car implements Loadable<Car> {
         rampRaised = true;
     }
 
+    public Queue<Car> getLoadedCars() {
+        return carLoader.getLoadedCars();
+    }
+
 
     public void raiseRamp() {
         rampRaised = true;
-    }
-
-    public Queue<Car> getLoadedCars() {
-        return carLoader.getLoadedCars();
     }
 
     public void lowerRamp() {
@@ -41,21 +41,25 @@ public class CarTransporter extends Car implements Loadable<Car> {
 
 
     public void unload() {
-        Car carToUnload = carLoader.getLoadedCars().getLast();
-        carLoader.unload(carToUnload, this);
-        switch (getDirection()) {
-            case UP:
-                carToUnload.setPosition(getX(), getY() + 0.5);
-                break;
-            case DOWN:
-                carToUnload.setPosition(getX(), getY() - 0.5);
-                break;
-            case RIGHT:
-                carToUnload.setPosition(getX() - 0.5, getY());
-                break;
-            case LEFT:
-                carToUnload.setPosition(getX() + 0.5, getY());
-                break;
+        if (!rampRaised) {
+            Car carToUnload = carLoader.getLoadedCars().getLast();
+            carLoader.unload(carToUnload, this);
+            switch (getDirection()) {
+                case UP:
+                    carToUnload.setPosition(getX(), getY() + 0.5);
+                    break;
+                case DOWN:
+                    carToUnload.setPosition(getX(), getY() - 0.5);
+                    break;
+                case RIGHT:
+                    carToUnload.setPosition(getX() - 0.5, getY());
+                    break;
+                case LEFT:
+                    carToUnload.setPosition(getX() + 0.5, getY());
+                    break;
+            }
+        }else{
+            System.out.println("Lower the ramp before unloading...");
         }
     }
 
@@ -80,4 +84,7 @@ public class CarTransporter extends Car implements Loadable<Car> {
         return (getEnginePower() / getTotalWeight()) * 50;
     }
 
+    public boolean isRampRaised() {
+        return rampRaised;
+    }
 }
