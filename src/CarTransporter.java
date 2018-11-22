@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public class CarTransporter implements Loadable, Movable {
+public class CarTransporter implements CarLoadable, Movable {
 
     private static final int loadCapacity = 10;
     private static final int maxCarWeight = 2500;
@@ -16,6 +16,10 @@ public class CarTransporter implements Loadable, Movable {
     public CarTransporter(int nrDoors, Color color, double enginePower) {
         car = new Car(nrDoors, color, enginePower, "Transporter of Cars", 10000);
         rampRaised = true;
+    }
+
+    public Car referToCar() {
+        return this.car;
     }
 
     public void startEngine() {
