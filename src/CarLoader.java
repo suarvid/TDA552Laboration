@@ -1,6 +1,13 @@
-
 import java.util.LinkedList;
-import java.util.Queue;
+
+/**
+ * Class defining the general attributes and methods for an object used to store Cars in.
+ * Delegated to Ferry and CarTransporter.
+ *
+ * @author Lantmannen, Matty, Alleboi
+ * @version 1.0
+ * @since 2018-11-22
+ */
 
 public class CarLoader {
 
@@ -10,23 +17,39 @@ public class CarLoader {
     private final int maxLoadWeight;
     private final LinkedList<Car> loadedCars = new LinkedList<>();
 
+    /**
+     *
+     * @param maxNrCars The maximum number of Cars that can be stored in the object.
+     * @param maxCarWeight The maximum allowed weight of an individual Car stored in the object.
+     * @param maxLoadWeight The maximum total weight of all Cars stored in the object combined.
+     */
+
     CarLoader(int maxNrCars, int maxCarWeight, int maxLoadWeight) {
         this.maxNrCars = maxNrCars;
         this.maxCarWeight = maxCarWeight;
         this.maxLoadWeight = maxLoadWeight;
     }
 
+    /**
+     *
+     * @return A list of all Cars currently loaded in the form of a LinkedList.
+     */
     public LinkedList<Car> getLoadedCars() {
         return loadedCars;
     }
 
+    /**
+     *
+     * @param carToLoad Target Car to load.
+     * @param currentLoader Vehicle delegating a CarLoader
+     */
 
     public void load(Car carToLoad, Vehicle currentLoader) {
         if (isFull()) {
             System.out.println("Cannot load! Car is either too heavy or at max Car capacity!");
         } else if (!closeEnoughToLoad(carToLoad, currentLoader.getX(), currentLoader.getY())) {
             System.out.println("Car is too far away to load!");
-        } else if (!carToLoad.isOnTransport()){
+        } else if (!carToLoad.isOnTransport()) {
             loadedCars.add(carToLoad);
             carToLoad.setOnTransport();
             currentLoadWeight += carToLoad.getTotalWeight();

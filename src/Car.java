@@ -120,6 +120,10 @@ public abstract class Car extends Vehicle implements Movable {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public abstract double speedFactor();
 
 
