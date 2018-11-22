@@ -18,7 +18,7 @@ public class CarTransporterTest {
      *
      */
     @Test
-    public void createCarTransporter() {
+    public void testCreateCarTransporter() {
         CarTransporter ct = new CarTransporter(2, Color.RED, 400, "CarTransporter", 0, 0);
     }
 
