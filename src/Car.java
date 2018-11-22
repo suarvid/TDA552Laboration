@@ -16,6 +16,7 @@ public abstract class Car extends Vehicle implements Movable {
     private int nrDoors;
     private double enginePower;
     private boolean engineOn = false;
+    private boolean onTransport = false;
 
 
     /**
@@ -111,10 +112,10 @@ public abstract class Car extends Vehicle implements Movable {
      */
     @Override
     public void move() {
-        if (engineOn) {
+        if (engineOn && !onTransport) {
             super.move();
         } else {
-            System.out.println("Turn on engine!");
+            System.out.println("Can't move, either engine is off, or Car is on Transport!");
         }
 
     }
@@ -178,5 +179,16 @@ public abstract class Car extends Vehicle implements Movable {
         }
     }
 
+    void setOnTransport() {
+        onTransport = true;
+    }
+
+    void takeOffTransport() {
+        onTransport = false;
+    }
+
+    public boolean isOnTransport() {
+        return onTransport;
+    }
 
 }

@@ -20,6 +20,8 @@ public class DriveCar {
         pasta.add(ferry);
         pasta.add(carTransporter);
 
+        volvo240.gas(1);
+
 
     }
 }

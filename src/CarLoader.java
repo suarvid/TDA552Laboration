@@ -26,8 +26,9 @@ public class CarLoader {
             System.out.println("Cannot load! Car is either too heavy or at max Car capacity!");
         } else if (!closeEnoughToLoad(carToLoad, currentLoader.getX(), currentLoader.getY())) {
             System.out.println("Car is too far away to load!");
-        } else {
+        } else if (!carToLoad.isOnTransport()){
             loadedCars.add(carToLoad);
+            carToLoad.setOnTransport();
             currentLoadWeight += carToLoad.getTotalWeight();
             currentLoader.setTotalWeight(currentLoader.getTotalWeight() + carToLoad.getTotalWeight());
             carToLoad.setPosition(currentLoader.getX(), currentLoader.getY());
@@ -41,6 +42,7 @@ public class CarLoader {
     public void unload(Car carToUnload, Vehicle currentLoader) {
         try {
             loadedCars.remove(carToUnload);
+            carToUnload.takeOffTransport();
             currentLoadWeight -= carToUnload.getTotalWeight();
             currentLoader.setTotalWeight(currentLoader.getTotalWeight() - carToUnload.getTotalWeight());
         } catch (NullPointerException eNullPoint) {
@@ -49,6 +51,10 @@ public class CarLoader {
     }
 
     public void unloadAll() {
+        for (Car car : loadedCars) {
+            //Sets bool in each car to false, allowing them to move once again
+            car.takeOffTransport();
+        }
         while (!loadedCars.isEmpty()) {
             loadedCars.remove();
         }
