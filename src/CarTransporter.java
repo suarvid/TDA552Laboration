@@ -77,7 +77,12 @@ public class CarTransporter extends Car implements Loadable<Car> {
      */
 
     public void unloadAll() {
-        carLoader.unloadAll();
+        if (!rampRaised) {
+            carLoader.unloadAll();
+
+        }else {
+            System.out.println("Lower the ramp before unloading...");
+        }
     }
 
     /**
