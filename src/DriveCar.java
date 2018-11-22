@@ -1,19 +1,25 @@
 import java.awt.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DriveCar {
     public static void main(String[] args) {
-        CarTransporter transporter = new CarTransporter(2,Color.ORANGE,300);
-        Ferry ferry = new Ferry();
+        Volvo240 redVolvo = new Volvo240(Color.RED, 100);
+        Saab95 greenVolvo = new Saab95(Color.GREEN, 100);
 
-        ferry.load(transporter.referToCar());
-        ferry.startEngine();
-        ferry.gas(1);
-        ferry.gas(1);
-        ferry.move();
-        ferry.move();
-        ferry.printPosition();
-        //transporter.printPosition();
+        Saab95 redSaab = new Saab95(Color.RED, 100);
+        Saab95 greenSaab = new Saab95(Color.GREEN, 100);
 
+
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        ArrayList<Car> cars = new ArrayList<>();
+
+
+        vehicles.add(redVolvo);
+        vehicles.add(greenVolvo);
+        vehicles.add(redSaab);
+        vehicles.add(greenSaab);
 
     }
 }

@@ -26,7 +26,7 @@ public class Volvo240 extends Car {
      */
 
     public Volvo240(Color color, double enginePower) {
-        super(4, color, enginePower, "Volvo240", 1200);
+        super(4, color, enginePower, "Volvo240", 1200,0,0);
         n240sCreated++;
         id = n240sCreated;
     }

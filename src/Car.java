@@ -5,61 +5,35 @@ import java.util.ArrayList;
  * Abstract class Car, implements interface Movable.
  * Specifies the general features and the basic functionality of a car.
  *
- *
  * @author Matte B, Arre S, Alle V
  * @version 1.0
  * @since 2018-11-07
  */
 
 
-public class Car implements Movable {
+public abstract class Car extends Vehicle implements Movable {
 
-    public enum Directions {LEFT, RIGHT, UP, DOWN}
-
-    private String modelname;
     private int nrDoors;
-    private Color color;
     private double enginePower;
-    private int totalWeight;
-    private double currentSpeed;
-    private Directions direction = Directions.UP;
-    private double x;
-    private double y;
     private boolean engineOn = false;
 
 
     /**
-     *
-     * @param nrDoors number of doors on the Car.
-     * @param color color of the Car.
+     * @param nrDoors     number of doors on the Car.
+     * @param color       color of the Car.
      * @param enginePower maximum speed of the Car.
-     * @param modelName name of the Car model.
+     * @param modelName   name of the Car model.
      */
-     Car(int nrDoors, Color color, double enginePower, String modelName, int totalWeight) {
+    Car(int nrDoors, Color color, double enginePower, String modelName, int totalWeight, double x, double y) {
+        super(modelName, color, totalWeight, x, y);
         this.nrDoors = nrDoors;
-        this.color = color;
         this.enginePower = enginePower;
-        this.modelname = modelName;
-        this.totalWeight = totalWeight;
     }
 
-    public int getTotalWeight() {
-        return totalWeight;
-    }
-    public void setTotalWeight(int weight){
-         this.totalWeight = weight;
-    }
+
 
 
     /**
-     * @return gets the current direction of the car
-     */
-    public Directions getDirection() {
-        return direction;
-    }
-
-    /**
-     *
      * @return gets the car's number of doors
      */
     public int getNrDoors() {
@@ -67,52 +41,12 @@ public class Car implements Movable {
     }
 
     /**
-     *
      * @return gets the engine power (maximum speed of the car)
      */
     public double getEnginePower() {
         return enginePower;
     }
 
-    /**
-     *
-     * @return gets the current speed of the car
-     */
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-
-    /**
-     *
-     * @return gets the color of the car
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    /**
-     * Sets the color of the car to specified color
-     * @param color specified color
-     */
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    /**
-     *
-     * @return gets the x position of the car
-     */
-    public double getX(){
-        return x;
-    }
-    /**
-     *
-     * @return gets the y position of the car
-     */
-    public double getY() {
-        return y;
-    }
 
     /**
      * Starts engine if it's not already on
@@ -121,7 +55,7 @@ public class Car implements Movable {
 
     public void startEngine() {
         if (!engineOn) {
-            currentSpeed = 0.1;
+            setCurrentSpeed(0.1);
             engineOn = true;
         }
     }
@@ -130,19 +64,11 @@ public class Car implements Movable {
      * Prints cars current position in console window.
      */
 
-    public void printPosition() {
-        System.out.println(modelname+" is at position: " + "x: " + x + ", y: " + y);
-    }
-
-    public void setPosition(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
 
     @Override
     public String toString() {
         String name = this.getClass().toString();
-        return "Model: " + name + " | nDoors: " + nrDoors + " | " + color + " | Engine-power: " + enginePower;
+        return "Model: " + name + " | nDoors: " + nrDoors + " | " + getColor() + " | Engine-power: " + enginePower;
     }
 
     /**
@@ -165,21 +91,9 @@ public class Car implements Movable {
     @Override
     public void turnLeft() {
         if (engineOn) {
-            switch (direction) {
-                case UP:
-                    direction = Directions.LEFT;
-                    break;
-                case LEFT:
-                    direction = Directions.DOWN;
-                    break;
-                case DOWN:
-                    direction = Directions.RIGHT;
-                    break;
-                case RIGHT:
-                    direction = Directions.UP;
-                    break;
-            }
+            super.turnLeft();
         }
+
     }
 
     /**
@@ -188,20 +102,7 @@ public class Car implements Movable {
     @Override
     public void turnRight() {
         if (engineOn) {
-            switch (direction) {
-                case UP:
-                    direction = Directions.RIGHT;
-                    break;
-                case LEFT:
-                    direction = Directions.UP;
-                    break;
-                case DOWN:
-                    direction = Directions.LEFT;
-                    break;
-                case RIGHT:
-                    direction = Directions.DOWN;
-                    break;
-            }
+            super.turnRight();
         }
     }
 
@@ -211,28 +112,14 @@ public class Car implements Movable {
     @Override
     public void move() {
         if (engineOn) {
-            switch (direction) {
-                case UP:
-                    y = y - currentSpeed;
-                    break;
-                case LEFT:
-                    x = x - currentSpeed;
-                    break;
-                case DOWN:
-                    y = y + currentSpeed;
-                    break;
-                case RIGHT:
-                    x = x + currentSpeed;
-                    break;
-            }
-
+            super.move();
+        } else {
+            System.out.println("Turn on engine!");
         }
 
     }
 
-    public double speedFactor() {
-        return 1;
-    }
+    public abstract double speedFactor();
 
 
     /**
@@ -241,10 +128,10 @@ public class Car implements Movable {
      * @param amount of increase in speed
      */
 
-    private void incrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-        if (currentSpeed > enginePower) {
-            currentSpeed = enginePower;
+    public void incrementSpeed(double amount) {
+        setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
+        if (getCurrentSpeed() > enginePower) {
+            setCurrentSpeed (enginePower);
         }
     }
 
@@ -254,10 +141,10 @@ public class Car implements Movable {
      * @param amount of decrease in speed
      */
 
-    private void decrementSpeed(double amount) {
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-        if (currentSpeed < 0) {
-            currentSpeed = 0;
+    public void decrementSpeed(double amount) {
+        setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
+        if (getCurrentSpeed() < 0) {
+            setCurrentSpeed (0);
         }
     }
 
@@ -281,6 +168,7 @@ public class Car implements Movable {
      *
      * @param amount 0 - 1, the limiting factor to how much the speed will decrease.
      */
+
     public void brake(double amount) {
         if (amount > 1.0) {
             amount = 1.0;
@@ -290,10 +178,5 @@ public class Car implements Movable {
         }
     }
 
-    public boolean isMoving() {
-        return currentSpeed > 0;
-    }
-    public void printCurrentSpeed(){
-        System.out.println(currentSpeed);
-    }
+
 }

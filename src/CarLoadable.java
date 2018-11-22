@@ -1,3 +1,4 @@
+/*
 public interface CarLoadable {
 
     <T extends Car> void load(T t);
@@ -9,3 +10,4 @@ public interface CarLoadable {
     void unloadAll();
 
 }
+*/

@@ -1,71 +1,69 @@
 import java.awt.*;
 import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
-public class Ferry implements Movable, CarLoadable {
+public class Ferry extends Vehicle {
 
-    private final Queue<Car> loadedCars = new LinkedBlockingQueue<>();
-    private final Car methCar = new Car(0, Color.BLACK, 100000, "Ferry", 30000);
+    private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
-    private int currentLoadWeight = 0;
-    private final int maxNrCars = 30;
-    private final int maxCarWeight = 20000;
-    private final int maxLoadWeight = 90000;
+    private boolean engineOn = false;
+    private double enginePower = 9001;
 
-    public Ferry() {
-
+    public Ferry(String modelname, Color color, int totalWeight, double x, double y) {
+        super(modelname, color, totalWeight, x, y);
     }
 
+    public Queue<Car> getLoadedCars() {
+        return carLoader.getLoadedCars();
+
+    }
 
     public void move() {
-        methCar.move();
-        for (Car car : loadedCars) {
-            car.setPosition(this.methCar.getX(), this.methCar.getY());
+        move();
+        for (Car car : carLoader.getLoadedCars()) {
+            car.setPosition(getX(), getY());
         }
     }
 
-    public void turnLeft() {
-        methCar.turnLeft();
+    public void load(Car carToLoad) {
+        carLoader.load(carToLoad, this);
     }
 
-    public void turnRight() {
-        methCar.turnRight();
+    @Override
+    public void decrementSpeed(double amount) {
+        setCurrentSpeed(getCurrentSpeed() - amount * (enginePower/10000));
     }
-
-    public void load(Car car) {
-        if (loadedCars.size() >= maxNrCars) {
-            System.out.println("Maximum number of loaded cars reached!");
-        } else if (currentLoadWeight + car.getTotalWeight() > maxLoadWeight) {
-            System.out.println("Maximum weight reached, cannot load car!");
-        } else if (car.getTotalWeight() > maxCarWeight) {
-            System.out.println("This car is too heavy!");
-        } else {
-            loadedCars.add(car);
-        }
+    @Override
+    public void incrementSpeed(double amount) {
+        setCurrentSpeed(getCurrentSpeed() + amount * (enginePower/10000));
     }
 
     public void unload() {
-
+        carLoader.unload(carLoader.getLoadedCars().getFirst());
     }
 
     public void unloadAll() {
-
+        carLoader.unloadAll();
     }
 
     public boolean isFull() {
-
-        return false; //Placeholder
+        return carLoader.isFull();
     }
 
-    public void printPosition() {
-        System.out.println("Ferry is at: " + methCar.getX() + ", " + methCar.getY());
-    }
 
     public void startEngine() {
-        methCar.startEngine();
+        engineOn = true;
+    }
+
+    public void stopEngine() {
+        engineOn = false;
     }
 
     public void gas(double amount) {
-        methCar.gas(amount);
+        if (amount > 1.0) {
+            amount = 1.0;
+        }
+        if (0 < amount) {
+            incrementSpeed(amount);
+        }
     }
 }

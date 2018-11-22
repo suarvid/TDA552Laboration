@@ -25,7 +25,7 @@ public class Saab95 extends Car {
      */
 
     public Saab95(Color color, double enginePower) {
-        super(4, color, enginePower, "Saab95", 1600);
+        super(4, color, enginePower, "Saab95", 1600, 0, 0);
         saab95sCreated++;
         id = saab95sCreated;
     }

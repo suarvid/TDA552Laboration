@@ -7,8 +7,8 @@ public class Scania extends Car {
     private double flatbedAngle;
     private double currentLoad;
 
-    public Scania(int nrDoors, Color color, double enginePower) {
-        super(nrDoors, color, enginePower, "Scania", 8000);
+    public Scania(int nrDoors, Color color, double enginePower, double x, double y) {
+        super(nrDoors, color, enginePower, "Scania", 8000, x, y);
         flatbedAngle = 0;
         currentLoad = 0;
     }
@@ -66,21 +66,20 @@ public class Scania extends Car {
     }
 
     public void lowerFlatbed() {
-        if(!(isMoving())) {
+        if (!(isMoving())) {
             if (flatbedAngle > 0) {
                 flatbedAngle -= 1.0;
             } else {
                 flatbedAngle = 0.0;
                 System.out.println("Flatbed is at lowest position!");
             }
-        } else  {
+        } else {
             System.out.println("Stop vehicle before lowering flatbed!");
         }
     }
 
     @Override
     public double speedFactor() {
-
-        return (getEnginePower()/getTotalWeight()) * 50;
+        return (getEnginePower() / getTotalWeight()) * 50;
     }
 }
