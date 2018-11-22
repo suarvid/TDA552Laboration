@@ -1,29 +1,28 @@
 import java.awt.*;
 import java.util.Queue;
 
-/**
- * Class CarTransporter, describes a Transportation vehicle for cars,
- * implements Loadable interface,
- * inherits basic Car functionality from class Car.
+/**<h1>Car Transporter</h1>
+ * Class representing the implementation of a car-carrying truck.
+ * Implements a <code>CarLoader</code> object through delegation.
  *
- * @author Matte B, Arre S, Alle V
+ * @author Paggan, Atto, MatteB
  * @version 1.0
- * @since 2018-11-07
+ * @since 2018-11-22
  */
 public class CarTransporter extends Car implements Loadable<Car> {
 
-    //Delegation to CarLoader for Car-loading functionality.
     private final CarLoader carLoader = new CarLoader(15, 3000, 50000);
-    //Keeps track of the ramp status.
+
     private boolean rampRaised;
 
     /**
-     * @param nrDoors     specifies the number of doors the carTransporter should have.
-     * @param color       specifies the color of the carTransporter
-     * @param enginePower specifies the power of the carTransporter's engine
-     * @param modelName   specifies the carTransporter's model name.
-     * @param x           specifies initial x-position
-     * @param y           specifis initial y-position
+     *
+     * @param nrDoors The number of Doors on the CarTransporter.
+     * @param color The Color of the CarTransporter.
+     * @param enginePower Engine Power of the CarTransporter, represents the maximum speed it can have.
+     * @param modelName The model name of the CarTransporter.
+     * @param x The current x-coordinate of the CarTransporter.
+     * @param y The current y-coordinate of the CarTransporter.
      */
     public CarTransporter(int nrDoors, Color color, double enginePower, String modelName, double x, double y) {
         super(nrDoors, color, enginePower, modelName, 7000, x, y);
@@ -31,24 +30,28 @@ public class CarTransporter extends Car implements Loadable<Car> {
     }
 
     /**
-     * @return the list of cars currently loaded on the carTransporter.
+     * Raises ramp of <code>CarTransporter</code>, allowing it to load <code>Car</code>s but disables the ability to move.
      */
-    public Queue<Car> getLoadedCars() {
-        return carLoader.getLoadedCars();
-    }
 
-    /**
-     * Raises the ramp to a raised poisition.
-     * Ramp needs to be raised before moving the carTransporter.
-     */
     public void raiseRamp() {
         rampRaised = true;
     }
 
     /**
-     * Lowers the ramp to a lowered position.
-     * Ramp needs to be lowered before loading a car onto the carTransporter.
+     *
+     * @return List of <class>Car</class>s currently loaded on <class>CarTransporter</class>, in form of a Queue
      */
+
+    public Queue<Car> getLoadedCars() {
+        return carLoader.getLoadedCars();
+    }
+
+    /**
+     * If CarTransporter is not moving, lowers the ramp.
+     * Lowering the ramp allows the CarTransporter to load Cars, adding them to the Queue of currently loaded cars.
+     * CarTransporter is not allowed to move while its ramp is lowered.
+     */
+
     public void lowerRamp() {
         if (isMoving()) {
             System.out.println("Stop moving before lowering the Ramp!");
@@ -58,11 +61,11 @@ public class CarTransporter extends Car implements Loadable<Car> {
     }
 
     /**
-     * Using methods from carLoader; loads a specified car onto the carTransporter
-     * <b>if</b> the ramp is lowered and we are not trying to load the carTransporter onto itself.
-     *
-     * @param carToLoad
+     * Loads a target Car-object on to the CarTransporter.
+     * Requires that the CarTransporters ramp is lowered and that the target Car is not already loaded on a transport.
+     * @param carToLoad Target Car-object to load on Transporter, adding it to the list of loaded Cars.
      */
+
     public void load(Car carToLoad) {
         if (!rampRaised && carToLoad != this) {
             carLoader.load(carToLoad, this);
@@ -70,8 +73,9 @@ public class CarTransporter extends Car implements Loadable<Car> {
     }
 
     /**
-     * Unloads <b>every</b> car from the carTransporter if the ramp is lowered.
+     * Unloads all Cars currently loaded on the CarTransporter.
      */
+
     public void unloadAll() {
         if (!rampRaised) {
             carLoader.unloadAll();
@@ -82,9 +86,11 @@ public class CarTransporter extends Car implements Loadable<Car> {
     }
 
     /**
-     * Unloads <b>one</b> car from the carTransporter if the ramp is lowered.
-     * Order is First In Last Out.
+     * Unloads the Car latest loaded on the CarTransporter, according to a Last on - First off principle.
+     * Unloaded Cars position is updated according to the CarTransporters direction when unloading.
+     *
      */
+
     public void unload() {
         if (!rampRaised) {
             Car carToUnload = carLoader.getLoadedCars().getLast();
@@ -103,17 +109,16 @@ public class CarTransporter extends Car implements Loadable<Car> {
                     carToUnload.setPosition(getX() + 0.5, getY());
                     break;
             }
-        } else {
+        }else{
             System.out.println("Lower the ramp before unloading...");
         }
     }
 
     /**
-     * Moves the carTransporter if the ramp is raised.
-     * Moves each car on the carTransporter with the it.
-     *
-     * Movement is based on currentSpeed which is increased with {@link Car#gas(double)}.
+     * Moves the CarTransporter and all the Cars currently loaded on it.
+     * Requires that the CarTransporters ramp is raised before moving.
      */
+
     public void move() {
         if (rampRaised) {
             super.move();
@@ -126,17 +131,18 @@ public class CarTransporter extends Car implements Loadable<Car> {
     }
 
     /**
-     * Checks wether the carTransporter is full or not
-     * @return true if the carTransporter has reached it's maximum number of loaded Cars.
+     * * @return Boolean reflecting if the CarTransporter has loaded the maximum amount of Cars it can carry.
      */
+
     public boolean isFull() {
         return carLoader.isFull();
     }
 
     /**
      *
-     * @return the specific speed factor for the carTransporter.
+     * @return Factor used to increase speed when calling method gas(). Is depends on how much is currently loaded on the CarTransporter.
      */
+
     @Override
     public double speedFactor() {
         return (getEnginePower() / getTotalWeight()) * 50;

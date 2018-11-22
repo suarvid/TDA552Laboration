@@ -21,6 +21,9 @@ public class DriveCar {
         pasta.add(carTransporter);
 
         volvo240.gas(1);
+        CarTransporter carTransporter1 = new CarTransporter(2,Color.RED,1,"hej",0,0);
+        CarLoader carLoader = new CarLoader(1,1,1);
+        CarLoaderTest carLoaderTest = new CarLoaderTest();
 
 
     }
