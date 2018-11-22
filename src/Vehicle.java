@@ -155,9 +155,13 @@ public abstract class Vehicle implements Movable {
         return direction;
     }
 
-    abstract void incrementSpeed(double amount);
+    private void incrementSpeed(double amount) {
 
-    abstract void decrementSpeed(double amount);
+    }
+
+    private void decrementSpeed(double amount) {
+        
+    }
 
 
 }

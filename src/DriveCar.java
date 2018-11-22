@@ -21,5 +21,12 @@ public class DriveCar {
         vehicles.add(redSaab);
         vehicles.add(greenSaab);
 
+        cars.add(redVolvo);
+        cars.add(greenVolvo);
+        cars.add(redSaab);
+        cars.add(greenSaab);
+
+
+
     }
 }
