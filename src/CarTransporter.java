@@ -1,8 +1,7 @@
 import java.awt.*;
 import java.util.Queue;
 
-public class CarTransporter extends Car {
-
+public class CarTransporter extends Car implements Loadable<Car> {
 
     private final CarLoader carLoader = new CarLoader(15, 3000, 50000);
 
@@ -35,6 +34,11 @@ public class CarTransporter extends Car {
             carLoader.load(carToLoad, this);
         }
     }
+
+    public void unloadAll() {
+        carLoader.unloadAll();
+    }
+
 
     public void unload() {
         Car carToUnload = carLoader.getLoadedCars().getLast();

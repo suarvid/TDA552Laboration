@@ -1,7 +1,7 @@
 import java.awt.*;
 
 //Ska Scania vara med i Loadable? Döpa om Loadable till VehicleLoader eller liknande?
-public class Scania extends Car {
+public class Scania extends Car implements Loadable<Integer> {
     private static int loadCapacity = 10000;
     //    private Car car;
     private double flatbedAngle;
@@ -17,7 +17,7 @@ public class Scania extends Car {
         return flatbedAngle;
     }
 
-    public void load(int loadWeight) {
+    public void load(Integer loadWeight) {
         if (currentLoad + loadWeight <= loadCapacity) {
             currentLoad += loadWeight;
             setTotalWeight(getTotalWeight() + loadWeight);
@@ -26,13 +26,17 @@ public class Scania extends Car {
         }
     }
 
-    public void unload(int weight) {
+    public void unload(Integer weight) {
         if (currentLoad - weight >= 0) {
             currentLoad -= weight;
             setTotalWeight(getTotalWeight() - weight);
         } else {
             System.out.println("Truck is not loaded with that much weight! Can't unload more than: " + currentLoad + " kg");
         }
+    }
+
+    public void unload() {
+        currentLoad = 0;
     }
 
     public boolean isFull() {

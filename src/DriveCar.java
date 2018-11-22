@@ -5,35 +5,20 @@ import java.util.LinkedList;
 
 public class DriveCar {
     public static void main(String[] args) {
-        Volvo240 redVolvo = new Volvo240(Color.RED, 100);
-        Saab95 greenVolvo = new Saab95(Color.GREEN, 100);
 
-        Saab95 redSaab = new Saab95(Color.RED, 100);
-        Saab95 greenSaab = new Saab95(Color.GREEN, 100);
+        CarTransporter carTransporter = new CarTransporter(2,Color.MAGENTA,100,"Trans",0,0);
+        Ferry ferry = new Ferry("Ferriboi", Color.ORANGE,0,0);
 
+        Volvo240 volvo240 = new Volvo240(Color.BLACK,180);
+        Saab95 saab95 = new Saab95(Color.GRAY, 200);
+        PorscheSpyder porscheSpyder = new PorscheSpyder(Color.RED,100);
 
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
-        ArrayList<Car> cars = new ArrayList<>();
+        Scania scania = new Scania(2,Color.BLUE,300,0,0);
 
-
-        vehicles.add(redVolvo);
-        vehicles.add(greenVolvo);
-        vehicles.add(redSaab);
-        vehicles.add(greenSaab);
-
-        cars.add(redVolvo);
-        cars.add(greenVolvo);
-        cars.add(redSaab);
-        cars.add(greenSaab);
-
-
-        CarTransporter carTransporter = new CarTransporter(2,Color.MAGENTA,100,"Transp",0,0);
-        carTransporter.lowerRamp();
-        carTransporter.load(carTransporter);
-        System.out.println(carTransporter.getLoadedCars());
-
-        carTransporter.load(redSaab);
-        carTransporter.load(greenVolvo);
+        ArrayList<Loadable> pasta = new ArrayList<>();
+        pasta.add(scania);
+        pasta.add(ferry);
+        pasta.add(carTransporter);
 
 
     }

@@ -1,15 +1,15 @@
 import java.awt.*;
 import java.util.Queue;
 
-public class Ferry extends Vehicle {
+public class Ferry extends Vehicle implements Loadable<Car> {
 
     private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
     private boolean engineOn = false;
     private double enginePower = 9001;
 
-    public Ferry(String modelname, Color color, int totalWeight, double x, double y) {
-        super(modelname, color, totalWeight, x, y);
+    public Ferry(String modelname, Color color, double x, double y) {
+        super(modelname, color, 8000, x, y);
     }
 
     public Queue<Car> getLoadedCars() {
@@ -30,11 +30,11 @@ public class Ferry extends Vehicle {
 
 
     public void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - amount * (enginePower/10000));
+        setCurrentSpeed(getCurrentSpeed() - amount * (enginePower / 10000));
     }
 
     public void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + amount * (enginePower/10000));
+        setCurrentSpeed(getCurrentSpeed() + amount * (enginePower / 10000));
     }
 
     public void unload() {

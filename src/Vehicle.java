@@ -46,6 +46,7 @@ public abstract class Vehicle implements Movable {
     public void turnLeft() {
         switch (direction) {
             case UP:
+
                 direction = Directions.LEFT;
                 break;
             case LEFT:
