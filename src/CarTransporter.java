@@ -21,7 +21,7 @@ public class CarTransporter extends Car implements Loadable<Car> {
         rampRaised = true;
     }
 
-    public void lowerRamp() {
+    public void lowerRamp(){
         if (isMoving()) {
             System.out.println("Stop moving before lowering the Ramp!");
         } else {
@@ -31,7 +31,11 @@ public class CarTransporter extends Car implements Loadable<Car> {
 
     public void load(Car carToLoad) {
         if (!rampRaised && carToLoad != this) {
-            carLoader.load(carToLoad, this);
+            try {
+                carLoader.load(carToLoad, this);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -63,7 +67,7 @@ public class CarTransporter extends Car implements Loadable<Car> {
         }
     }
 
-    public void move() {
+    public void move(){
         if (rampRaised) {
             super.move();
             for (Car loadedCar : carLoader.getLoadedCars()) {

@@ -25,7 +25,11 @@ public class Ferry extends Vehicle implements Loadable<Car> {
     }
 
     public void load(Car carToLoad) {
-        carLoader.load(carToLoad, this);
+        try {
+            carLoader.load(carToLoad, this);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 
