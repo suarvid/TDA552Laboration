@@ -124,6 +124,7 @@ public class CarTransporterTest {
         //unload a car, this is OK!
         ct.lowerRamp();
         ct.unload();
+        Assert.assertEquals(volvo240, ct.getLoadedCars());
         Assert.assertEquals(2,ct.getLoadedCars().size());
 
         //Start moving the cartransporter
