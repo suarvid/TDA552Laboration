@@ -14,7 +14,6 @@ public class Volvo240 extends Car {
     private static long n240sCreated = 0;
     private final static double trimFactor = 1.25;
 
-
     //Non-static
     private long id;
 

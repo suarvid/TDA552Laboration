@@ -159,7 +159,7 @@ public abstract class Car extends Vehicle implements Movable {
         if (amount > 1.0) {
             amount = 1.0;
         }
-        if (0 < amount) {
+        if (0 < amount && !onTransport) {
             incrementSpeed(amount);
         }
     }

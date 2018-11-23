@@ -12,9 +12,8 @@ import java.awt.*;
  */
 public class CarTransporterTest {
 
-
     /**
-     * test to create a cartransporter with valid parameters
+     * test to create a CarTransporter with valid parameters
      *
      */
     @Test
@@ -143,7 +142,6 @@ public class CarTransporterTest {
         ct.lowerRamp();
         ct.unloadAll();
         Assert.assertEquals(0,ct.getLoadedCars().size());
-
     }
 
     /**
