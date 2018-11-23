@@ -62,7 +62,7 @@ public class CarLoaderTest {
     @Test
     public void unloadWithFerry(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", Color.BLUE, 0, 0);
+        Ferry ferry = new Ferry("Ferry", 2000,Color.BLUE, 0, 0);
         Saab95 saab95 = new Saab95(Color.RED, 180);
         Volvo240 volvo1 = new Volvo240(Color.CYAN, 200);
         Volvo240 volvo2 = new Volvo240(Color.BLUE, 300);
@@ -81,7 +81,7 @@ public class CarLoaderTest {
     @Test
     public void closeEnoughToLoad(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", Color.BLUE, 10, 10);
+        Ferry ferry = new Ferry("Ferry", 2000,Color.BLUE, 10, 10);
         Saab95 saab95 = new Saab95(Color.RED, 180);
         carLoader.load(saab95, ferry);
         assertTrue(ferry.getLoadedCars().size() == 0);
@@ -93,7 +93,7 @@ public class CarLoaderTest {
     @Test
     public void unloadAll(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", Color.BLUE, 0, 0);
+        Ferry ferry = new Ferry("Ferry", 2000,Color.BLUE, 0, 0);
         Saab95 saab95 = new Saab95(Color.RED, 180);
         Volvo240 volvo1 = new Volvo240(Color.CYAN, 200);
         Volvo240 volvo2 = new Volvo240(Color.BLUE, 300);
@@ -109,7 +109,7 @@ public class CarLoaderTest {
     @Test
     public void loadToMax(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", Color.BLUE, 0, 0);
+        Ferry ferry = new Ferry("Ferry",2000, Color.BLUE, 0, 0);
         for(int i = 0; i < 5; i++){
             carLoader.load(new Volvo240(Color.CYAN, 200),ferry);
         }
@@ -118,7 +118,7 @@ public class CarLoaderTest {
     @Test
     public void isFull(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", Color.BLUE, 0, 0);
+        Ferry ferry = new Ferry("Ferry",2000, Color.BLUE, 0, 0);
         for(int i = 0; i < 5; i++){
             carLoader.load(new Volvo240(Color.CYAN, 200),ferry);
         }
