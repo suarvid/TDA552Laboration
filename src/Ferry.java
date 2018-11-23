@@ -1,22 +1,45 @@
 import java.awt.*;
 import java.util.Queue;
 
+/**
+ * <h1>Car Transporter</h1>
+ * Class representing a ferry.
+ * Implements a <code>CarLoader</code> object through delegation.
+ *
+ * @author Paggan, Atto, MatteB
+ * @version 1.0
+ * @since 2018-11-22
+ */
 public class Ferry extends Vehicle implements Loadable<Car> {
+
 
     private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
     private boolean engineOn = false;
     private double enginePower = 9001;
 
+    /**
+     * @param modelname the name of the ferry model
+     * @param color     color of the ferry
+     * @param x         X-position of the ferry
+     * @param y         Y-position of the ferry
+     */
     public Ferry(String modelname, Color color, double x, double y) {
         super(modelname, color, 8000, x, y);
     }
 
+    /**
+     * @return List of <class>Car</class>s currently loaded on <class>Ferry</class>, in form of a Queue
+     */
     public Queue<Car> getLoadedCars() {
         return carLoader.getLoadedCars();
 
     }
 
+    /**
+     * Moves the Ferry and all the Cars currently loaded on it.
+     */
+    @Override
     public void move() {
         move();
         for (Car car : carLoader.getLoadedCars()) {
@@ -24,40 +47,72 @@ public class Ferry extends Vehicle implements Loadable<Car> {
         }
     }
 
+    /**
+     * Loads a target Car-object on to the Ferry.
+     * Requires that the target Car is not already loaded on a CarLoader.
+     * @param carToLoad Target Car-object to load on Ferry, adding it to the list of loaded Cars.
+     */
     public void load(Car carToLoad) {
         carLoader.load(carToLoad, this);
     }
 
 
-    public void decrementSpeed(double amount) {
+    /**
+     *Decreases the speed of the Ferry.
+     * @param amount how much to decrease the speed with.
+     */
+    private void decrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() - amount * (enginePower / 10000));
     }
 
-    public void incrementSpeed(double amount) {
+    /**
+     * Increases the speed of the ferry.
+     * @param amount how much to decrease the speed with.
+     */
+    private void incrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() + amount * (enginePower / 10000));
     }
 
+    /**
+     * Unloads a car from the ferry.
+     */
     public void unload() {
         carLoader.unload(carLoader.getLoadedCars().getFirst(), this);
     }
 
+    /**
+     * Unloads all cars from the ferry.
+     */
     public void unloadAll() {
         carLoader.unloadAll();
     }
 
+    /**
+     *
+     * @return Returns full if the Ferry has reached its loading capacity.
+     */
     public boolean isFull() {
         return carLoader.isFull();
     }
 
-
+    /**
+     * Starts the engine of the Ferry
+     */
     public void startEngine() {
         engineOn = true;
     }
 
+    /**
+     * Stops the engine of the Ferry.
+     */
     public void stopEngine() {
         engineOn = false;
     }
 
+    /**
+     * Increases the speed of the ferry by amount (in consideration to enginePower)
+     * @param amount the amount of speed increase.
+     */
     public void gas(double amount) {
         if (amount > 1.0) {
             amount = 1.0;

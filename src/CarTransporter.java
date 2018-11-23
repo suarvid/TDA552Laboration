@@ -118,7 +118,7 @@ public class CarTransporter extends Car implements Loadable<Car> {
      * Moves the CarTransporter and all the Cars currently loaded on it.
      * Requires that the CarTransporters ramp is raised before moving.
      */
-
+    @Override
     public void move() {
         if (rampRaised) {
             super.move();
