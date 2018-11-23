@@ -39,7 +39,7 @@ public class CarLoader {
     }
 
     /**
-     *
+     * Loads a car to a loader vehicle
      * @param carToLoad Target Car to load.
      * @param currentLoader Vehicle delegating a CarLoader
      */
@@ -58,9 +58,23 @@ public class CarLoader {
         }
     }
 
+    /**
+     * Checks if car to be loaded is close enough to loader
+     * @param carToLoad car to be loaded
+     * @param loaderX loaders x-position
+     * @param loaderY loaders y-position
+     * @return true if car is close enough
+     */
+
     private boolean closeEnoughToLoad(Car carToLoad, double loaderX, double loaderY) {
         return !((Math.abs(carToLoad.getX() - loaderX) > 1) || Math.abs(carToLoad.getY() - loaderY) > 1);
     }
+
+    /**
+     * Unloads a given car from given loader vehicle
+     * @param carToUnload car to be unloaded
+     * @param currentLoader Loadable object that car should be unloaded from
+     */
 
     public void unload(Car carToUnload, Vehicle currentLoader) {
         try {
@@ -72,6 +86,10 @@ public class CarLoader {
             System.out.println("Loader is already empty, cannot unload!");
         }
     }
+    /**
+     * Unloads all car from loader.
+     * sets new
+     */
 
     public void unloadAll(Loadable currentLoader) {
         for (int i = 0; i < loadedCars.size(); i++) {
@@ -81,6 +99,10 @@ public class CarLoader {
         }
     }
 
+    /**
+     * Controls if car loader have reached maximum number of cars or if maxweight.
+     * @return true if car loader is full.
+     */
     public boolean isFull() {
         return loadedCars.size() == maxNrCars || currentLoadWeight == maxLoadWeight;
     }
