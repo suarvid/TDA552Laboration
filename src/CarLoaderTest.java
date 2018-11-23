@@ -100,7 +100,7 @@ public class CarLoaderTest {
         carLoader.load(saab95, ferry);
         carLoader.load(volvo1, ferry);
         carLoader.load(volvo2, ferry);
-        carLoader.unloadAll();
+        carLoader.unloadAll(ferry);
         assertTrue(carLoader.getLoadedCars().size() == 0);
     }
     /**

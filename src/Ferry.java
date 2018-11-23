@@ -84,7 +84,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
      * Unloads all cars from the ferry.
      */
     public void unloadAll() {
-        carLoader.unloadAll();
+        carLoader.unloadAll(this);
     }
 
     /**

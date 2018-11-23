@@ -73,13 +73,11 @@ public class CarLoader {
         }
     }
 
-    public void unloadAll() {
-        for (Car car : loadedCars) {
+    public void unloadAll(Loadable currentLoader) {
+        for (int i = 0; i < loadedCars.size(); i++) {
             //Sets bool in each car to false, allowing them to move once again
-            car.takeOffTransport();
-        }
-        while (!loadedCars.isEmpty()) {
-            loadedCars.remove();
+
+            currentLoader.unload();
         }
     }
 
