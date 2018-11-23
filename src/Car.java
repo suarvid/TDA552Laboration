@@ -56,7 +56,7 @@ public abstract class Car extends Vehicle implements Movable {
 
     public void startEngine() {
         if (!engineOn) {
-            setCurrentSpeed(0.1);
+//            setCurrentSpeed(0.1);
             engineOn = true;
         }
     }
@@ -96,6 +96,7 @@ public abstract class Car extends Vehicle implements Movable {
         }
 
     }
+
 
     /**
      * Set new direction to the right of current direction.
@@ -182,6 +183,10 @@ public abstract class Car extends Vehicle implements Movable {
             decrementSpeed(amount);
         }
     }
+
+    /**
+     * 
+     */
 
     void setOnTransport() {
         onTransport = true;
