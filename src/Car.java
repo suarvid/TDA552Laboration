@@ -195,4 +195,8 @@ public abstract class Car extends Vehicle implements Movable {
         return onTransport;
     }
 
+    public boolean isEngineOn() {
+        return engineOn;
+    }
+
 }
