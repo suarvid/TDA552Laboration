@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Abstract class Car, implements interface Movable.
+ * Abstract class Car, implements interface Movable. Also extends Vehicle
  * Specifies the general features and the basic functionality of a car.
  *
  * @author Matte B, Arre S, Alle V
