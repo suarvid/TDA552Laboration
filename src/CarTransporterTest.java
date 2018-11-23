@@ -110,29 +110,30 @@ public class CarTransporterTest {
         Volvo240 volvo240 = new Volvo240(Color.GREEN, 180);
         PorscheSpyder porsche = new PorscheSpyder(Color.MAGENTA,360);
 
+
         ct.lowerRamp();
         ct.load(saab95);
         ct.load(volvo240);
         ct.load(porsche);
 
-//        //cannot unload with ramp raised...
-//        ct.raiseRamp();
-//        ct.unload();
-//        Assert.assertEquals(3,ct.getLoadedCars().size());
-//
-//        //unload a car, this is OK!
-//        ct.lowerRamp();
-//        ct.unload();
-//        Assert.assertEquals(2,ct.getLoadedCars().size());
-//
-//        //Start moving the cartransporter
-//        ct.raiseRamp();
-//        ct.startEngine();
-//        ct.gas(1);
-//        ct.move();
-//        //cannot unload while moving...
-//        ct.unload();
-//        Assert.assertEquals(2,ct.getLoadedCars().size());
+        //cannot unload with ramp raised...
+        ct.raiseRamp();
+        ct.unload();
+        Assert.assertEquals(3,ct.getLoadedCars().size());
+
+        //unload a car, this is OK!
+        ct.lowerRamp();
+        ct.unload();
+        Assert.assertEquals(2,ct.getLoadedCars().size());
+
+        //Start moving the cartransporter
+        ct.raiseRamp();
+        ct.startEngine();
+        ct.gas(1);
+        ct.move();
+        //cannot unload while moving...
+        ct.unload();
+        Assert.assertEquals(2,ct.getLoadedCars().size());
 
         //Finally stop and unload all cars
         ct.stopEngine();
