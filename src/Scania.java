@@ -127,6 +127,7 @@ public class Scania extends Car implements Loadable<Integer> {
         }
     }
 
+
     /**
      *
      * @return speedFactor used for accelerating and braking.
