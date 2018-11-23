@@ -120,7 +120,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
         if (amount > 1.0) {
             amount = 1.0;
         }
-        if (0 < amount) {
+        if (0 < amount && engineOn) {
             incrementSpeed(amount);
         }
     }

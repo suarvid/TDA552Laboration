@@ -20,6 +20,33 @@ public class FerryTest {
     public void createFerry() {
         Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
     }
+    /**
+     * Test to start engine.
+     */
+    @Test
+    public void testStartEngine(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.startEngine();
+    }
+    /**
+     * Test gas
+     */
+    @Test
+    public void gas(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.startEngine();
+        ferry.gas(1);
+        assertTrue(ferry.getCurrentSpeed() > 0);
+    }
+    /**
+     * Test gas without starting engine
+     */
+    @Test
+    public void gasEngineOff(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.gas(1);
+        assertEquals(0,ferry.getCurrentSpeed(),0);
+    }
 
 
     /**
