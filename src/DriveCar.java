@@ -7,7 +7,7 @@ public class DriveCar {
     public static void main(String[] args) {
 
         CarTransporter carTransporter = new CarTransporter(2,Color.MAGENTA,100,"Trans",0,0);
-        Ferry ferry = new Ferry("Ferriboi", Color.ORANGE,0,0);
+        Ferry ferry = new Ferry("Ferriboi",300, Color.ORANGE,0,0);
 
         Volvo240 volvo240 = new Volvo240(Color.BLACK,180);
         Saab95 saab95 = new Saab95(Color.GRAY, 200);

@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**<h1>Car Transporter</h1>
@@ -42,7 +43,7 @@ public class CarTransporter extends Car implements Loadable<Car> {
      * @return List of <class>Car</class>s currently loaded on <class>CarTransporter</class>, in form of a Queue
      */
 
-    public Queue<Car> getLoadedCars() {
+    public LinkedList<Car> getLoadedCars() {
         return carLoader.getLoadedCars();
     }
 

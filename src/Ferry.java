@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -16,7 +17,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
     private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
     private boolean engineOn = false;
-    private double enginePower = 9001;
+    private int enginePower;
 
     /**
      * @param modelname the name of the ferry model
@@ -24,14 +25,15 @@ public class Ferry extends Vehicle implements Loadable<Car> {
      * @param x         X-position of the ferry
      * @param y         Y-position of the ferry
      */
-    public Ferry(String modelname, Color color, double x, double y) {
+    public Ferry(String modelname, int enginePower, Color color, double x, double y) {
         super(modelname, color, 8000, x, y);
+        this.enginePower = enginePower;
     }
 
     /**
      * @return List of <class>Car</class>s currently loaded on <class>Ferry</class>, in form of a Queue
      */
-    public Queue<Car> getLoadedCars() {
+    public LinkedList<Car> getLoadedCars() {
         return carLoader.getLoadedCars();
 
     }
