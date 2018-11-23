@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +14,22 @@ public class CarLoaderTest {
     public void createCarLoader() {
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
     }
+
+    /**
+     * Test that getLoadedCars() returns a list with the loaded car.
+     */
+    @Test
+    public void getLoadedCars(){
+        CarLoader carLoader = new CarLoader(4, 2000, 6000);
+        CarTransporter transporter = new CarTransporter(4,Color.BLUE,200,"DHL",0,0);
+        Saab95 saab95 = new Saab95(Color.RED,180);
+        carLoader.load(saab95,transporter);
+        assertEquals(saab95, carLoader.getLoadedCars().getFirst());
+    }
+
+    /**
+     * Test to load two cars and checks that car loader holds more than one car.
+     */
     @Test
     public void load(){
         CarLoader carLoader = new CarLoader(4, 2000, 6000);
@@ -98,5 +115,16 @@ public class CarLoaderTest {
         }
         assertTrue(carLoader.getLoadedCars().size() == 4);
     }
+    @Test
+    public void isFull(){
+        CarLoader carLoader = new CarLoader(4, 2000, 6000);
+        Ferry ferry = new Ferry("Ferry", Color.BLUE, 0, 0);
+        for(int i = 0; i < 5; i++){
+            carLoader.load(new Volvo240(Color.CYAN, 200),ferry);
+        }
+        assertTrue(carLoader.isFull());
+    }
+
+
 
 }

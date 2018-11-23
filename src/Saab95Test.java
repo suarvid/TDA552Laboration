@@ -1,7 +1,5 @@
 import static org.junit.Assert.*;
 
-import com.sun.javafx.scene.traversal.Direction;
-import junit.framework.Assert;
 import org.junit.Test;
 
 import java.awt.*;
