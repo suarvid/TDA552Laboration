@@ -11,7 +11,7 @@ public class Scania extends Car implements Loadable<Integer> {
     private static int loadCapacity = 10000;
 
     private double flatbedAngle;
-    private double currentLoad;
+    private int currentLoad;
 
     /**
      *
@@ -57,6 +57,10 @@ public class Scania extends Car implements Loadable<Integer> {
         } else {
             System.out.println("Truck is not loaded with that much weight! Can't unload more than: " + currentLoad + " kg");
         }
+    }
+
+    public int getCurrentLoad() {
+        return currentLoad;
     }
 
     /**
