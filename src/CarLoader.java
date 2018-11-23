@@ -92,9 +92,7 @@ public class CarLoader {
      */
 
     public void unloadAll(Loadable currentLoader) {
-        for (int i = 0; i < loadedCars.size(); i++) {
-            //Sets bool in each car to false, allowing them to move once again
-
+        while (loadedCars.size() > 0) {
             currentLoader.unload();
         }
     }
