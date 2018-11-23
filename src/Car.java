@@ -32,8 +32,6 @@ public abstract class Car extends Vehicle implements Movable {
     }
 
 
-
-
     /**
      * @return gets the car's number of doors
      */
@@ -62,7 +60,7 @@ public abstract class Car extends Vehicle implements Movable {
     }
 
     /**
-     * Prints cars current position in console window.
+     * Prints Car's current position in console window.
      */
 
 
@@ -86,7 +84,7 @@ public abstract class Car extends Vehicle implements Movable {
 
 
     /**
-     * Set new direction to the left of current direction
+     * Set new direction to the left of Car's current direction
      */
 
     @Override
@@ -94,12 +92,10 @@ public abstract class Car extends Vehicle implements Movable {
         if (engineOn) {
             super.turnLeft();
         }
-
     }
 
-
     /**
-     * Set new direction to the right of current direction.
+     * Set new direction to the right of Car's current direction.
      */
     @Override
     public void turnRight() {
@@ -122,7 +118,6 @@ public abstract class Car extends Vehicle implements Movable {
     }
 
     /**
-     *
      * @return
      */
     public abstract double speedFactor();
@@ -137,7 +132,7 @@ public abstract class Car extends Vehicle implements Movable {
     private void incrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
         if (getCurrentSpeed() > enginePower) {
-            setCurrentSpeed (enginePower);
+            setCurrentSpeed(enginePower);
         }
     }
 
@@ -150,7 +145,7 @@ public abstract class Car extends Vehicle implements Movable {
     private void decrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
         if (getCurrentSpeed() < 0) {
-            setCurrentSpeed (0);
+            setCurrentSpeed(0);
         }
     }
 
@@ -185,20 +180,32 @@ public abstract class Car extends Vehicle implements Movable {
     }
 
     /**
-     * 
+     * Changes boolean onTransport to true, enables each Car to internally keep track of if they are loaded on a transport.
      */
 
     void setOnTransport() {
         onTransport = true;
     }
 
+    /**
+     * Changes boolean onTransport to false, enables each Car to internally keep track of if they are loaded on a transport.
+     */
+
     void takeOffTransport() {
         onTransport = false;
     }
 
+    /**
+     * @return Boolean onTransport, affects if Car can move or not.
+     */
+
     public boolean isOnTransport() {
         return onTransport;
     }
+
+    /**
+     * @return Boolean engineOn, affects if Car is able to move.
+     */
 
     public boolean isEngineOn() {
         return engineOn;
