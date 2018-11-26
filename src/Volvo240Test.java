@@ -3,6 +3,8 @@ import org.junit.Test;
 import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Volvo240Test {
     @Test
@@ -15,7 +17,7 @@ public class Volvo240Test {
     public void startCar() {
         Volvo240 car = new Volvo240( Color.ORANGE, 380);
         car.startEngine();
-        assertEquals(0.1, car.getCurrentSpeed(), 0.000001);
+        assertEquals(0, car.getCurrentSpeed(), 0);
     }
 
     @Test
@@ -81,7 +83,10 @@ public class Volvo240Test {
         Volvo240 car = new Volvo240( Color.ORANGE, 380);
         car.startEngine();
         car.move();
-        assertEquals(true,car.getY() < 0);
+        assertFalse(car.getY() < 0);
+        car.gas(1);
+        car.move();
+        assertTrue(car.getY() < 0);
     }
 
     @Test

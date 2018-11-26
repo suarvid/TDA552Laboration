@@ -63,6 +63,10 @@ public class Scania extends Car implements Loadable<Object> {
         }
     }
 
+    /**
+     * @return Weight of current load on Scania
+     */
+
     public int getCurrentLoad() {
         return currentLoad;
     }
@@ -90,6 +94,7 @@ public class Scania extends Car implements Loadable<Object> {
      * Moving requires the flatbedAngle to be 0.
      */
 
+    //TODO Overridea gas istället
     @Override
     public void move() {
         if (flatbedAngle == 0) {

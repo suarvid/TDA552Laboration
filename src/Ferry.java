@@ -13,7 +13,6 @@ import java.util.Queue;
  */
 public class Ferry extends Vehicle implements Loadable<Car> {
 
-
     private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
     private boolean engineOn = false;
