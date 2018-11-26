@@ -20,6 +20,33 @@ public class FerryTest {
     public void createFerry() {
         Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
     }
+    /**
+     * Test to start engine.
+     */
+    @Test
+    public void testStartEngine(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.startEngine();
+    }
+    /**
+     * Test gas
+     */
+    @Test
+    public void gas(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.startEngine();
+        ferry.gas(1);
+        assertTrue(ferry.getCurrentSpeed() > 0);
+    }
+    /**
+     * Test gas without starting engine
+     */
+    @Test
+    public void gasEngineOff(){
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        ferry.gas(1);
+        assertEquals(0,ferry.getCurrentSpeed(),0);
+    }
 
 
     /**
@@ -51,7 +78,7 @@ public class FerryTest {
      */
     @Test
     public void testLoadSeveral(){
-        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 10, 10);
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
         Saab95 saab95 = new Saab95(Color.RED, 180);
         Volvo240 volvo240 = new Volvo240(Color.GREEN, 180);
         PorscheSpyder porsche = new PorscheSpyder(Color.MAGENTA, 360);
@@ -66,7 +93,7 @@ public class FerryTest {
      */
     @Test
     public void testLoadWhileMoving() {
-        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        Ferry ferry = new Ferry("Ferris", 9000, Color.RED, 0, 0);
         Volvo240 volvo240 = new Volvo240(Color.RED, 180);
         ferry.startEngine();
         ferry.gas(1);
@@ -105,9 +132,11 @@ public class FerryTest {
      */
     @Test
     public void testUnload(){
-        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 10, 10);
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
         Saab95 saab95 = new Saab95(Color.RED, 180);
         Volvo240 volvo240 = new Volvo240(Color.GREEN, 180);
+        ferry.load(saab95);
+        ferry.load(volvo240);
         ferry.unload();
         assertEquals(volvo240,ferry.getLoadedCars().getFirst());
     }
@@ -135,17 +164,13 @@ public class FerryTest {
      */
     @Test
     public void testIsFull() {
-        CarTransporter ct = new CarTransporter(2, Color.RED, 400, "CarTransporter", 0, 0);
-        ct.lowerRamp();
-        for (int i = 1; i <= 14; i++) {
-            ct.load(new Volvo240(Color.RED, 180));
+        Ferry ferry = new Ferry("Ferris", 5000, Color.RED, 0, 0);
+        for (int i = 1; i < 30; i++) {
+            ferry.load(new Volvo240(Color.RED, 180));
         }
-
-        assertFalse(ct.isFull());
-        ct.load(new Volvo240(Color.RED, 180));
-        assertTrue(ct.isFull());
-        ct.load(new Volvo240(Color.RED, 180));
-        assertTrue(ct.isFull());
+        assertFalse(ferry.isFull());
+        ferry.load(new Volvo240(Color.RED, 180));
+        assertTrue(ferry.isFull());
     }
 
 }

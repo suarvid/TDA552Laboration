@@ -6,7 +6,7 @@
  * @version 1.0
  * @since 2018-11-07
  */
-public interface Loadable<T> {
+public interface Loadable<T>  {
 
     /**
      * Loads the loadable with an object of arbitrary type.

@@ -118,14 +118,13 @@ public abstract class Car extends Vehicle implements Movable {
     }
 
     /**
-     * @return
+     * @return Factor used by Cars when calling methods gas() and brake().
      */
     public abstract double speedFactor();
 
 
     /**
      * Increments speed by given amount
-     *
      * @param amount of increase in speed
      */
 
@@ -138,7 +137,6 @@ public abstract class Car extends Vehicle implements Movable {
 
     /**
      * Decrements speed by given amount
-     *
      * @param amount of decrease in speed
      */
 
@@ -159,14 +157,13 @@ public abstract class Car extends Vehicle implements Movable {
         if (amount > 1.0) {
             amount = 1.0;
         }
-        if (0 < amount) {
+        if (0 < amount && !onTransport) {
             incrementSpeed(amount);
         }
     }
 
     /**
      * Decreases speed by a limited factor, only applies amount in interval 0 - 1
-     *
      * @param amount 0 - 1, the limiting factor to how much the speed will decrease.
      */
 

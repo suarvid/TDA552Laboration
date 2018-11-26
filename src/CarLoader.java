@@ -9,6 +9,8 @@ import java.util.LinkedList;
  * @since 2018-11-22
  */
 
+//TODO Interfaces och typa CarLoader om vi ids.
+
 public class CarLoader {
 
     private int currentLoadWeight;

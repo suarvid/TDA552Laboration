@@ -87,22 +87,7 @@ public class CarLoaderTest {
         assertTrue(ferry.getLoadedCars().size() == 0);
     }
 
-    /**
-     * Test to unload all cars on a ferry.
-     */
-    @Test
-    public void unloadAll(){
-        CarLoader carLoader = new CarLoader(4, 2000, 6000);
-        Ferry ferry = new Ferry("Ferry", 2000,Color.BLUE, 0, 0);
-        Saab95 saab95 = new Saab95(Color.RED, 180);
-        Volvo240 volvo1 = new Volvo240(Color.CYAN, 200);
-        Volvo240 volvo2 = new Volvo240(Color.BLUE, 300);
-        carLoader.load(saab95, ferry);
-        carLoader.load(volvo1, ferry);
-        carLoader.load(volvo2, ferry);
-        carLoader.unloadAll(ferry);
-        assertTrue(carLoader.getLoadedCars().size() == 0);
-    }
+
     /**
      * Test that only maximum number of cars can be loaded.
      */

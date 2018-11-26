@@ -13,7 +13,6 @@ import java.util.Queue;
  */
 public class Ferry extends Vehicle implements Loadable<Car> {
 
-
     private final CarLoader carLoader = new CarLoader(30, 20000, 90000);
 
     private boolean engineOn = false;
@@ -43,7 +42,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
      */
     @Override
     public void move() {
-        move();
+        super.move();
         for (Car car : carLoader.getLoadedCars()) {
             car.setPosition(getX(), getY());
         }
@@ -55,7 +54,8 @@ public class Ferry extends Vehicle implements Loadable<Car> {
      * @param carToLoad Target Car-object to load on Ferry, adding it to the list of loaded Cars.
      */
     public void load(Car carToLoad) {
-        carLoader.load(carToLoad, this);
+        if (!isMoving())
+            carLoader.load(carToLoad, this);
     }
 
 
@@ -72,7 +72,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
      * @param amount how much to decrease the speed with.
      */
     private void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + amount * (enginePower / 10000));
+        setCurrentSpeed(getCurrentSpeed() + amount * (enginePower / 1000));
     }
 
     /**
@@ -119,7 +119,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
         if (amount > 1.0) {
             amount = 1.0;
         }
-        if (0 < amount) {
+        if (0 < amount && engineOn) {
             incrementSpeed(amount);
         }
     }

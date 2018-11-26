@@ -18,7 +18,7 @@ public class Saab95Test {
     public void startCar() {
         Car car = new Saab95(Color.ORANGE, 380);
         car.startEngine();
-        assertEquals(0.1, car.getCurrentSpeed(), 0.000001);
+        assertEquals(0, car.getCurrentSpeed(), 0);
     }
 
     @Test
@@ -101,6 +101,9 @@ public class Saab95Test {
         Saab95 car = new Saab95(Color.MAGENTA, 150);
         car.startEngine();
         car.move();
-        assertEquals(true, car.getY() < 0);
+        assertFalse(car.getY() < 0);
+        car.gas(1);
+        car.move();
+        assertTrue(car.getY() < 0);
     }
 }

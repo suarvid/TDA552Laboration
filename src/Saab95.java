@@ -19,7 +19,6 @@ public class Saab95 extends Car {
 
     /**
      * Takes two in-parameters, and passes some class-specific values to super-constructor
-     *
      * @param color       color of the Saab95.
      * @param enginePower maximum speed of the Saab95.
      */
@@ -30,14 +29,27 @@ public class Saab95 extends Car {
         id = saab95sCreated;
     }
 
+    /**
+     * Turns the Saab95's turbo on.
+     * Affects the SpeedFactor used when calling methods gas() and brake() in Car.
+     */
 
     public void setTurboOn() {
         turboOn = true;
     }
 
+    /**
+     * Turns the Saab95's turbo off.
+     * Affects the SpeedFactor used when calling methods gas() and brake() in Car.
+     */
+
     public void setTurboOff() {
         turboOn = false;
     }
+
+    /**
+     * @return Boolean turboOn,
+     */
 
     public boolean isTurboOn() {
         return turboOn;
@@ -45,7 +57,6 @@ public class Saab95 extends Car {
 
     /**
      * If turbo is on, speedFactor increases with a greater amount.
-     *
      * @return speedFactor to calc new speed with.
      */
 

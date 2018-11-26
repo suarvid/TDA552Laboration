@@ -7,19 +7,18 @@ import java.awt.*;
  * @version 1.0
  * @since 2018-11-22
  */
-public class Scania extends Car implements Loadable<Integer> {
+public class Scania extends Car implements Loadable<Object> {
     private static int loadCapacity = 10000;
 
     private double flatbedAngle;
     private int currentLoad;
 
     /**
-     *
-     * @param nrDoors Number of doors on the Scania,
-     * @param color Color of the Scania.
+     * @param nrDoors     Number of doors on the Scania,
+     * @param color       Color of the Scania.
      * @param enginePower Engine Power of the Scania, affects acceleration and specifies maximum speed.
-     * @param x The x-coordinate of the Scanias position.
-     * @param y The y-coordinate of the Scanias position.
+     * @param x           The x-coordinate of the Scanias position.
+     * @param y           The y-coordinate of the Scanias position.
      */
     public Scania(int nrDoors, Color color, double enginePower, double x, double y) {
         super(nrDoors, color, enginePower, "Scania", 8000, x, y);
@@ -28,7 +27,6 @@ public class Scania extends Car implements Loadable<Integer> {
     }
 
     /**
-     *
      * @return current Angle of the Scanias Flatbed. Interval of 0-70 degrees.
      */
     public double getFlatbedAngle() {
@@ -36,15 +34,21 @@ public class Scania extends Car implements Loadable<Integer> {
     }
 
     /**
-     * @param loadWeight Weight of the unspecified object(s) being loaded.
+     * @param weightOfLoad Weight of the unspecified object(s) being loaded.
      */
-    public void load(Integer loadWeight) {
-        if (currentLoad + loadWeight <= loadCapacity) {
-            currentLoad += loadWeight;
-            setTotalWeight(getTotalWeight() + loadWeight);
-        } else {
-            System.out.println("Can't load the truck with that much weight!");
+    public void load(Object weightOfLoad) {
+        try {
+            int loadWeight = (Integer) weightOfLoad;
+            if (currentLoad + loadWeight <= loadCapacity) {
+                currentLoad += loadWeight;
+                setTotalWeight(getTotalWeight() + loadWeight);
+            } else {
+                System.out.println("Can't load the truck with that much weight!");
+            }
+        } catch (ClassCastException cce) {
+            System.out.println("Cannot load the Scania with that object! Try sending weight of object as parameter!");
         }
+
     }
 
     /**
@@ -58,6 +62,10 @@ public class Scania extends Car implements Loadable<Integer> {
             System.out.println("Truck is not loaded with that much weight! Can't unload more than: " + currentLoad + " kg");
         }
     }
+
+    /**
+     * @return Weight of current load on Scania
+     */
 
     public int getCurrentLoad() {
         return currentLoad;
@@ -86,6 +94,7 @@ public class Scania extends Car implements Loadable<Integer> {
      * Moving requires the flatbedAngle to be 0.
      */
 
+    //TODO Overridea gas istället
     @Override
     public void move() {
         if (flatbedAngle == 0) {
@@ -133,7 +142,6 @@ public class Scania extends Car implements Loadable<Integer> {
 
 
     /**
-     *
      * @return speedFactor used for accelerating and braking.
      */
 
