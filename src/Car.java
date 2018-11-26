@@ -70,6 +70,8 @@ public abstract class Car extends Vehicle implements Movable {
         return "Model: " + name + " | nDoors: " + nrDoors + " | " + getColor() + " | Engine-power: " + enginePower;
     }
 
+
+
     /**
      * Stops the engine.
      * If current speed > 0, reduce speed until current speed = 0.
@@ -207,5 +209,7 @@ public abstract class Car extends Vehicle implements Movable {
     public boolean isEngineOn() {
         return engineOn;
     }
+
+
 
 }

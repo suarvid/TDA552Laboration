@@ -26,6 +26,12 @@ public class Scania extends Car implements Loadable<Object> {
         currentLoad = 0;
     }
 
+    public Scania() {
+        super(2, Color.GREEN, 200, "Scania", 8000, 0, 0);
+        flatbedAngle = 0;
+        currentLoad = 0;
+    }
+
     /**
      * @return current Angle of the Scanias Flatbed. Interval of 0-70 degrees.
      */
