@@ -62,6 +62,19 @@ public class CarController {
         }
     }
 
+    void brake(int amount) {
+        double brake = ((double) amount / 100);
+        for (Car car : cars) {
+            car.brake(brake);
+        }
+    }
+
+    void stopEngine() {
+        for (Car car : cars) {
+            car.stopEngine();
+        }
+    }
+
     void startEngine() {
         for (Car car : cars) {
             car.startEngine();
