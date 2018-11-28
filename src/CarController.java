@@ -26,17 +26,13 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
-    // A list of cars, modify if needed
-    //ArrayList<Car> cars = new ArrayList<>();
+
     private Map<Car,BufferedImage> imageCarMap = new HashMap<>();
     private String imagesPath = "src//pics//";
     private String volvoImage = "Volvo240.jpg";
     private String saabImage = "Saab95.jpg";
     private String scaniaImage = "Scania.jpg";
 
-
-
-    //methods:
 
     public static void main(String[] args) {
         // Instance of this class
@@ -152,6 +148,26 @@ public class CarController {
     void startEngine() {
         for (Car car : imageCarMap.keySet()) {
             car.startEngine();
+        }
+    }
+    void raiseFlatBed() {
+        for (Car car : imageCarMap.keySet()) {
+            try {
+                Scania scania = (Scania) car;
+                scania.raiseFlatbed();
+            } catch (ClassCastException cce) {
+
+            }
+        }
+    }
+    void lowerFlatbed() {
+        for (Car car : imageCarMap.keySet()) {
+            try {
+                Scania scania = (Scania) car;
+                scania.lowerFlatbed();
+            } catch (ClassCastException cce) {
+
+            }
         }
     }
 
