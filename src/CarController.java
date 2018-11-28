@@ -26,11 +26,11 @@ public class CarController {
     private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    private CarView frame;
     // A list of cars, modify if needed
     //ArrayList<Car> cars = new ArrayList<>();
     private Map<Car,BufferedImage> imageCarMap = new HashMap<>();
-    private String imagesPath = "src\\pics\\";
+    private String imagesPath = "src//pics//";
     private String volvoImage = "Volvo240.jpg";
     private String saabImage = "Saab95.jpg";
     private String scaniaImage = "Scania.jpg";
@@ -101,7 +101,7 @@ public class CarController {
     }
 
     private void turnAround(Car car) {
-        if (car.getX() > 0) {
+        if (car.getX() + saabImage.length() > 0) {
             car.turnRight();
             car.turnRight();
             //Checks out of bounds to the right
@@ -113,6 +113,17 @@ public class CarController {
     }
 
     // Calls the gas method for each car once
+    void turboOn() {
+        for (Car car : imageCarMap.keySet()) {
+            try {
+                Saab95 saab95 = (Saab95) car;
+                saab95.setTurboOn();
+            } catch (ClassCastException cce) {
+
+            }
+        }
+    }
+
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : imageCarMap.keySet()) {

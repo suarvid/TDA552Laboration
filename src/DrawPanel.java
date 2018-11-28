@@ -12,7 +12,7 @@ public class DrawPanel extends JPanel{
     // Just a single image, TODO: Generalize
     private BufferedImage currentImage;
 
-    // To keep track of a singel cars position
+    // To keep track of a single cars position
     Point imageCenterPoint = new Point();
 
     // TODO: Make this general for all cars
