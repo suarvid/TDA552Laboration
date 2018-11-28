@@ -43,7 +43,8 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
-        cc.createVehicle(new Saab95(100,100),cc.saabImage);
+        cc.createVehicle(new Saab95(0,100),cc.saabImage);
+        cc.createVehicle(new Scania(0,200),cc.scaniaImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -76,13 +77,9 @@ public class CarController {
                 Car car = tuple.getKey();
                 car.move();
 
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-
-                frame.drawPanel.updateImagePosition(x, y);
-                frame.drawPanel.setCurrentImage(tuple.getValue());
-                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.updatePanelObjects(car,tuple.getValue());
                 frame.drawPanel.repaint();
+                // repaint() calls the paintComponent method of the panel
                 if (isOutOfBounds(car)) {
                     turnAround(car);
                 }
