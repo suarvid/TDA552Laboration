@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Scanner;
 
 /**
  * Class representing a truck, Scania.
@@ -28,6 +29,12 @@ public class Scania extends Car implements Loadable<Object> {
 
     public Scania() {
         super(2, Color.GREEN, 200, "Scania", 8000, 0, 150);
+        flatbedAngle = 0;
+        currentLoad = 0;
+    }
+
+    public Scania(double x, double y) {
+        super(2, Color.GREEN, 200, "Scania", 8000, x, y);
         flatbedAngle = 0;
         currentLoad = 0;
     }

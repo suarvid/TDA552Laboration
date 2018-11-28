@@ -42,8 +42,8 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.createVehicle(new Volvo240(Color.RED,180),cc.volvoImage);
-        cc.createVehicle(new Volvo240(Color.RED,360),cc.volvoImage);
+        cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
+        cc.createVehicle(new Saab95(100,100),cc.saabImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
