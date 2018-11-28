@@ -4,11 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +42,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.adjustPathToOS();
-
-        cc.createVehicle(new Volvo240(Color.RED,180),cc.volvoImage);
-        cc.createVehicle(new Volvo240(Color.RED,360),cc.volvoImage);
+        cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
+        cc.createVehicle(new Saab95(0,100),cc.saabImage);
+        cc.createVehicle(new Scania(0,200),cc.scaniaImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -69,23 +65,6 @@ public class CarController {
         }
     }
 
-    private void colorCar(){
-        RGBImageFilter = ;
-    }
-
-    public BufferedImage filterRGB(int x, int y, BufferedImage image) {
-
-        BufferedImageOp colorizeFilter = create;
-        BufferedImage targetImage = colorizeFilter.filter(image, null);
-
-        return targetImage;
-    }
-
-    private void adjustPathToOS(){
-        if(System.getProperty("os.name").equals("Linux")){
-            imagesPath = "src//pics//";
-        }
-    }
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -98,13 +77,9 @@ public class CarController {
                 Car car = tuple.getKey();
                 car.move();
 
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-
-                frame.drawPanel.updateImagePosition(x, y);
-                frame.drawPanel.setCurrentImage(tuple.getValue());
-                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.updatePanelObjects(car,tuple.getValue());
                 frame.drawPanel.repaint();
+                // repaint() calls the paintComponent method of the panel
                 if (isOutOfBounds(car)) {
                     turnAround(car);
                 }
@@ -112,17 +87,25 @@ public class CarController {
         }
     }
 
+    private double getMaxX(Car car) {
+        return car.getX() + imageCarMap.get(car).getWidth();
+    }
+
+    private double getMinX(Car car) {
+        return car.getX();
+    }
+
     private boolean isOutOfBounds(Car car) {
-        if (car.getX() < 0) {
+        if (getMinX(car) < 0) {
             return true;
-        } else if (car.getX() > frame.getX()) {
+        } else if (getMaxX(car) > frame.getX()) {
             return true;
         }
         return false;
     }
 
     private void turnAround(Car car) {
-        if (car.getX() + saabImage.length() > 0) {
+        if (car.getX() > 0) {
             car.turnRight();
             car.turnRight();
             //Checks out of bounds to the right

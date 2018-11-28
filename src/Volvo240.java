@@ -36,6 +36,12 @@ public class Volvo240 extends Car {
         id = n240sCreated;
     }
 
+    public Volvo240(double x, double y) {
+        super(4,Color.BLACK,180,"Volvo240",1200,x,y);
+        n240sCreated++;
+        id = n240sCreated;
+    }
+
     /**
      * @return speedFactor to calc new speed with, depends on the cars trimFactor
      */

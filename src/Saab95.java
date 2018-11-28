@@ -35,6 +35,12 @@ public class Saab95 extends Car {
         id = saab95sCreated;
     }
 
+    public Saab95(double x, double y) {
+        super(4, Color.BLUE, 150, "Saab95", 1600, x,y);
+        saab95sCreated++;
+        id =saab95sCreated;
+    }
+
     /**
      * Turns the Saab95's turbo on.
      * Affects the SpeedFactor used when calling methods gas() and brake() in Car.
