@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,6 +67,18 @@ public class CarController {
         {
             ex.printStackTrace();
         }
+    }
+
+    private void colorCar(){
+        RGBImageFilter = ;
+    }
+
+    public BufferedImage filterRGB(int x, int y, BufferedImage image) {
+
+        BufferedImageOp colorizeFilter = create;
+        BufferedImage targetImage = colorizeFilter.filter(image, null);
+
+        return targetImage;
     }
 
     private void adjustPathToOS(){
