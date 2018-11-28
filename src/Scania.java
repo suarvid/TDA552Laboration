@@ -27,7 +27,7 @@ public class Scania extends Car implements Loadable<Object> {
     }
 
     public Scania() {
-        super(2, Color.GREEN, 200, "Scania", 8000, 0, 0);
+        super(2, Color.GREEN, 200, "Scania", 8000, 0, 150);
         flatbedAngle = 0;
         currentLoad = 0;
     }

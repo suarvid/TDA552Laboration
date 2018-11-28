@@ -43,7 +43,7 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.createVehicle(new Volvo240(),cc.volvoImage);
+        cc.cars.add(new Volvo240());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -81,8 +81,32 @@ public class CarController {
                 frame.drawPanel.setCurrentImage(tuple.getValue());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                if (isOutOfBounds(car)) {
+                    turnAround(car);
+                }
             }
         }
+    }
+
+    private boolean isOutOfBounds(Car car) {
+        if (car.getX() < 0) {
+            return true;
+        } else if (car.getX() > frame.getX()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void turnAround(Car car) {
+        if (car.getX() > 0) {
+            car.turnRight();
+            car.turnRight();
+            //Checks out of bounds to the right
+        } else if (car.getX() < 0) {
+            car.turnRight();
+            car.turnRight();
+        }
+        //Checks out of bounds to the left
     }
 
     // Calls the gas method for each car once
@@ -111,4 +135,5 @@ public class CarController {
             car.startEngine();
         }
     }
+
 }
