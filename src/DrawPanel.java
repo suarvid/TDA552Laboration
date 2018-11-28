@@ -9,11 +9,11 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    private HashMap<Car,BufferedImage> pointAndImage = new HashMap<>();
+    private Map<Car,BufferedImage> carsAndImage;
 
 
-    void updatePanelObjects(Car c,BufferedImage image){
-        pointAndImage.put(c,image);
+    void setHashMap(Map<Car,BufferedImage> map){
+        carsAndImage = map;
     }
 
     // Initializes the panel and reads the images
@@ -33,12 +33,12 @@ public class DrawPanel extends JPanel{
                 int y = 0;
                 int x = 0;
 
-                for(Map.Entry<Car, BufferedImage> tuple : pointAndImage.entrySet()) {
-                    Car car = tuple.getKey();
+                for(Map.Entry<Car, BufferedImage> pair : carsAndImage.entrySet()) {
+                    Car car = pair.getKey();
                     y = (int)car.getY();
                     x = (int)car.getX();
-                    BufferedImage i = tuple.getValue();
-                    g.drawImage(i, x, y, null);
+                    BufferedImage image = pair.getValue();
+                    g.drawImage(image, x, y, null);
                 }
 
             }catch (Exception e){

@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -44,6 +43,7 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame.drawPanel.setHashMap(cc.imageCarMap);
 
         // Start the timer
         cc.timer.start();
@@ -72,8 +72,6 @@ public class CarController {
             for (Map.Entry<Car, BufferedImage> tuple : imageCarMap.entrySet()) {
                 Car car = tuple.getKey();
                 car.move();
-
-                frame.drawPanel.updatePanelObjects(car,tuple.getValue());
                 frame.drawPanel.repaint();
                 // repaint() calls the paintComponent method of the panel
                 if (isOutOfBounds(car)) {
