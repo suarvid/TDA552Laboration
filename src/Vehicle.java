@@ -16,7 +16,7 @@ public abstract class Vehicle implements Movable {
     private Color color;
     private int totalWeight;
     private double currentSpeed;
-    private Directions direction = Directions.UP;
+    private Directions direction = Directions.RIGHT;
     private double x;
     private double y;
 

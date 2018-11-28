@@ -1,7 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -30,6 +35,16 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Saab95());
+        cc.cars.add(new Scania());
+        HashMap<Car, Image> carImageHashMap = new HashMap<>();
+        try {
+        carImageHashMap.put(new Volvo240(), ImageIO.read(new File("src//pics//Volvo240.jpg")));
+        carImageHashMap.put(new Saab95(), ImageIO.read(new File("src//pics//Saab95.jpg")));
+        carImageHashMap.put(new Scania(), ImageIO.read(new File("src//pics//Scania.jpg")));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -37,6 +52,12 @@ public class CarController {
         // Start the timer
         cc.timer.start();
     }
+
+    /*public void iterateUsingLambda(Map<Car, Image> map) {
+        Car current;
+        map.forEach((k, v) -> System.out.println("K: " + k + ", V: " + v));
+    }*/
+
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
@@ -50,8 +71,32 @@ public class CarController {
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                if (isOutOfBounds(car)) {
+                    handleOutOfBounds(car);
+                }
             }
         }
+    }
+
+    private boolean isOutOfBounds(Car car) {
+        if (car.getX() < 0) {
+            return true;
+        } else if (car.getX() > frame.getX()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void handleOutOfBounds(Car car) {
+        if (car.getX() > 0) {
+            car.turnRight();
+            car.turnRight();
+            //Checks out of bounds to the right
+        } else if (car.getX() < 0) {
+            car.turnRight();
+            car.turnRight();
+        }
+        //Checks out of bounds to the left
     }
 
     // Calls the gas method for each car once

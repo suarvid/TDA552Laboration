@@ -13,13 +13,13 @@ public class DrawPanel extends JPanel{
     private BufferedImage volvoImage;
     private BufferedImage saabImage;
     private BufferedImage scaniaImage;
-    // To keep track of a singel cars position
-    Point volvoPoint = new Point();
+    // To keep track of a single cars position
+    Point currentCarPoint = new Point();
 
     // TODO: Make this general for all cars
     void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+        currentCarPoint.x = x;
+        currentCarPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -41,7 +41,6 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -49,8 +48,8 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(saabImage, volvoPoint.x + 50, volvoPoint.y + 50, null);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(scaniaImage,volvoPoint.x + 100, volvoPoint.y + 100,null);
+        g.drawImage(saabImage, currentCarPoint.x , currentCarPoint.y, null);
+       /* g.drawImage(volvoImage, currentCarPoint.x, currentCarPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(scaniaImage, currentCarPoint.x, currentCarPoint.y,null);*/
     }
 }

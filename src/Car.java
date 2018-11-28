@@ -114,7 +114,8 @@ public abstract class Car extends Vehicle implements Movable {
         if (engineOn && !onTransport) {
             super.move();
         } else {
-            System.out.println("Can't move, either engine is off, or Car is on Transport!");
+//            Blev väldigt mycket spam i simulatorn innan man startar motorerna
+//            System.out.println("Can't move, either engine is off, or Car is on Transport!");
         }
 
     }
@@ -159,7 +160,7 @@ public abstract class Car extends Vehicle implements Movable {
         if (amount > 1.0) {
             amount = 1.0;
         }
-        if (0 < amount && !onTransport) {
+        if (0 < amount && !onTransport && engineOn) {
             incrementSpeed(amount);
         }
     }

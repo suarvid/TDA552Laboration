@@ -30,7 +30,7 @@ public class Saab95 extends Car {
     }
 
     public Saab95() {
-        super(4, Color.BLUE, 150, "Saab95", 1600, 0, 0);
+        super(4, Color.BLUE, 150, "Saab95", 1600, 0, 100);
         saab95sCreated++;
         id = saab95sCreated;
     }
