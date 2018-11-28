@@ -43,13 +43,15 @@ public class DrawPanel extends JPanel{
         }
     }
 
+
+
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(saabImage, currentCarPoint.x , currentCarPoint.y, null);
-       /* g.drawImage(volvoImage, currentCarPoint.x, currentCarPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(scaniaImage, currentCarPoint.x, currentCarPoint.y,null);*/
+        g.drawImage(volvoImage, currentCarPoint.x, currentCarPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(scaniaImage, currentCarPoint.x, currentCarPoint.y,null);
     }
 }

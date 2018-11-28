@@ -39,9 +39,9 @@ public class CarController {
         cc.cars.add(new Scania());
         HashMap<Car, Image> carImageHashMap = new HashMap<>();
         try {
-        carImageHashMap.put(new Volvo240(), ImageIO.read(new File("src//pics//Volvo240.jpg")));
-        carImageHashMap.put(new Saab95(), ImageIO.read(new File("src//pics//Saab95.jpg")));
-        carImageHashMap.put(new Scania(), ImageIO.read(new File("src//pics//Scania.jpg")));
+            carImageHashMap.put(new Volvo240(), ImageIO.read(new File("src//pics//Volvo240.jpg")));
+            carImageHashMap.put(new Saab95(), ImageIO.read(new File("src//pics//Saab95.jpg")));
+            carImageHashMap.put(new Scania(), ImageIO.read(new File("src//pics//Scania.jpg")));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -72,7 +72,7 @@ public class CarController {
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
                 if (isOutOfBounds(car)) {
-                    handleOutOfBounds(car);
+                    turnAround(car);
                 }
             }
         }
@@ -87,7 +87,7 @@ public class CarController {
         return false;
     }
 
-    private void handleOutOfBounds(Car car) {
+    private void turnAround(Car car) {
         if (car.getX() > 0) {
             car.turnRight();
             car.turnRight();
