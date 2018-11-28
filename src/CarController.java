@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,8 +42,6 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.adjustPathToOS();
-
         cc.createVehicle(new Volvo240(Color.RED,180),cc.volvoImage);
         cc.createVehicle(new Volvo240(Color.RED,360),cc.volvoImage);
 
@@ -67,11 +64,6 @@ public class CarController {
         }
     }
 
-    private void adjustPathToOS(){
-        if(System.getProperty("os.name").equals("Linux")){
-            imagesPath = "src//pics//";
-        }
-    }
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -98,17 +90,25 @@ public class CarController {
         }
     }
 
+    private double getMaxX(Car car) {
+        return car.getX() + imageCarMap.get(car).getWidth();
+    }
+
+    private double getMinX(Car car) {
+        return car.getX();
+    }
+
     private boolean isOutOfBounds(Car car) {
-        if (car.getX() < 0) {
+        if (getMinX(car) < 0) {
             return true;
-        } else if (car.getX() > frame.getX()) {
+        } else if (getMaxX(car) > frame.getX()) {
             return true;
         }
         return false;
     }
 
     private void turnAround(Car car) {
-        if (car.getX() + saabImage.length() > 0) {
+        if (car.getX() > 0) {
             car.turnRight();
             car.turnRight();
             //Checks out of bounds to the right
