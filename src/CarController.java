@@ -29,7 +29,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     //ArrayList<Car> cars = new ArrayList<>();
-    private Map<Vehicle,Image> imageVehicleMap = new HashMap<>();
+    private Map<Car,BufferedImage> imageCarMap = new HashMap<>();
     private String imagesPath = "src\\pics\\";
     private String volvoImage = "Volvo240.jpg";
     private String saabImage = "Saab95.jpg";
@@ -43,7 +43,8 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
+        cc.createVehicle(new Volvo240(Color.RED,180),cc.volvoImage);
+        cc.createVehicle(new Volvo240(Color.RED,360),cc.volvoImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -52,10 +53,11 @@ public class CarController {
         cc.timer.start();
     }
 
-    private void createVehicle(Vehicle vehicle, String filename){
+    private void createVehicle(Car car, String filename){
         try {
             BufferedImage image = ImageIO.read(new File(imagesPath + filename));
-            imageVehicleMap.put(vehicle,image);
+            imageCarMap.put(car,image);
+            System.out.println(image);
 
         } catch (IOException ex)
         {
@@ -71,11 +73,12 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            for (Map.Entry<Vehicle, Image> tuple : imageVehicleMap.entrySet()) {
-                Vehicle vehicle = tuple.getKey();
-                vehicle.move();
-                int x = (int) Math.round(vehicle.getX());
-                int y = (int) Math.round(vehicle.getY());
+            for (Map.Entry<Car, BufferedImage> tuple : imageCarMap.entrySet()) {
+                Car car = tuple.getKey();
+                car.move();
+
+                int x = (int) Math.round(car.getX());
+                int y = (int) Math.round(car.getY());
 
                 frame.drawPanel.updateImagePosition(x, y);
                 frame.drawPanel.setCurrentImage(tuple.getValue());
@@ -112,26 +115,27 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars) {
+        for (Vehicle vehicle : imageCarMap.keySet()) {
+            Car car = (Car) vehicle;
             car.gas(gas);
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount / 100);
-        for (Car car : cars) {
+        for (Car car : imageCarMap.keySet()) {
             car.brake(brake);
         }
     }
 
     void stopEngine() {
-        for (Car car : cars) {
+        for (Car car : imageCarMap.keySet()) {
             car.stopEngine();
         }
     }
 
     void startEngine() {
-        for (Car car : cars) {
+        for (Car car : imageCarMap.keySet()) {
             car.startEngine();
         }
     }
