@@ -43,6 +43,8 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
+        cc.adjustPathToOS();
+
         cc.createVehicle(new Volvo240(Color.RED,180),cc.volvoImage);
         cc.createVehicle(new Volvo240(Color.RED,360),cc.volvoImage);
 
@@ -65,6 +67,11 @@ public class CarController {
         }
     }
 
+    private void adjustPathToOS(){
+        if(System.getProperty("os.name").equals("Linux")){
+            imagesPath = "src//pics//";
+        }
+    }
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
