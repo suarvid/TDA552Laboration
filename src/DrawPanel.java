@@ -10,16 +10,14 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    private BufferedImage volvoImage;
-    private BufferedImage saabImage;
-    private BufferedImage scaniaImage;
+    private BufferedImage currentImage;
     // To keep track of a singel cars position
-    Point volvoPoint = new Point();
+    Point currentPoint = new Point();
 
     // TODO: Make this general for all cars
     void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+        currentPoint.x = x;
+        currentPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -28,19 +26,7 @@ public class DrawPanel extends JPanel{
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         // Print an error message in case file is not found with a try/catch block
-        try {
-            // You can remove the "src\\pics" part if running outside of IntelliJ and
-            // everything is in the same main folder.
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-            // if you are starting in IntelliJ.
-            // Linux users need to modify \ to / in path string
-            volvoImage = ImageIO.read(new File("src//pics//Volvo240.jpg"));
-            saabImage = ImageIO.read(new File("src//pics//Saab95.jpg"));
-            scaniaImage = ImageIO.read(new File("src//pics//Scania.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
+
 
     }
 
@@ -49,8 +35,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(saabImage, volvoPoint.x + 50, volvoPoint.y + 50, null);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(scaniaImage,volvoPoint.x + 100, volvoPoint.y + 100,null);
+        g.drawImage(currentImage, currentPoint.x, currentPoint.y, null);
+
     }
 }

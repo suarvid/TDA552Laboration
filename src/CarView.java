@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -128,6 +129,7 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
+
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
