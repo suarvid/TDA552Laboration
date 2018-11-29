@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+/**
  * This class represents the Controller part in the MVC pattern.
  * It's responsibilities is to listen to the View and responds in a appropriate manner by
  * modifying the model state and the updating the view.
+ *
+ *  @author Matte B, Arre S, Alle V, Alex G
+ *  @version 1.0
+ *  @since 2018-11-29
  */
 
 public class CarController {
-    // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
@@ -37,6 +40,7 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
+        //maps cars with respective image
         cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
         cc.createVehicle(new Saab95(0,100),cc.saabImage);
         cc.createVehicle(new Scania(0,200),cc.scaniaImage);
@@ -49,6 +53,11 @@ public class CarController {
         cc.timer.start();
     }
 
+    /**
+     * Creates a image from filename if possible and maps car with image.
+     * @param car the car to map
+     * @param filename the filname of the image file to map
+     */
     private void createVehicle(Car car, String filename){
         try {
             BufferedImage image = ImageIO.read(new File(imagesPath + filename));
@@ -63,8 +72,9 @@ public class CarController {
 
 
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
+    /**
+     * Moves all the cars in the list and tells the
+     * view to update its images.
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -81,10 +91,20 @@ public class CarController {
         }
     }
 
+    /**
+     * Calculate the x-coordinate for the image's most right corner.
+     * @param car the car that maps with the image.
+     * @return the x-coordinate for image's most right corner.
+     */
     private double getMaxX(Car car) {
         return car.getX() + imageCarMap.get(car).getWidth();
     }
 
+    /**
+     * Returns the x-coordinate for car's image's most left corner.
+     * @param car the car that maps with the image.
+     * @return the x-coordinate for car's image's most left corner.
+     */
     private double getMinX(Car car) {
         return car.getX();
     }
