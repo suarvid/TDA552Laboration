@@ -3,9 +3,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * <h1>Car Transporter</h1>
+ * Car Transporter
  * Class representing a ferry.
- * Implements a <code>CarLoader</code> object through delegation.
+ * Implements a CarLoader object through delegation.
  *
  * @author Paggan, Atto, MatteB
  * @version 1.0
@@ -30,7 +30,7 @@ public class Ferry extends Vehicle implements Loadable<Car> {
     }
 
     /**
-     * @return List of <class>Car</class>s currently loaded on <class>Ferry</class>, in form of a Queue
+     * @return List of Car currently loaded on Ferry, in form of a Queue
      */
     public LinkedList<Car> getLoadedCars() {
         return carLoader.getLoadedCars();
