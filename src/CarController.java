@@ -26,7 +26,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
 
-    private Map<Car,BufferedImage> imageCarMap = new HashMap<>();
+    private Map<Car, BufferedImage> imageCarMap = new HashMap<>();
     private String imagesPath = "src//pics//";
     private String volvoImage = "Volvo240.jpg";
     private String saabImage = "Saab95.jpg";
@@ -37,9 +37,9 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
-        cc.createVehicle(new Saab95(0,100),cc.saabImage);
-        cc.createVehicle(new Scania(0,200),cc.scaniaImage);
+        cc.createVehicle(new Volvo240(0, 0), cc.volvoImage);
+        cc.createVehicle(new Saab95(0, 100), cc.saabImage);
+        cc.createVehicle(new Scania(0, 200), cc.scaniaImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -49,18 +49,16 @@ public class CarController {
         cc.timer.start();
     }
 
-    private void createVehicle(Car car, String filename){
+    private void createVehicle(Car car, String filename) {
         try {
             BufferedImage image = ImageIO.read(new File(imagesPath + filename));
-            imageCarMap.put(car,image);
+            imageCarMap.put(car, image);
             System.out.println(image);
 
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
 
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -89,6 +87,11 @@ public class CarController {
         return car.getX();
     }
 
+    /**
+     * Controls whether a car is out of bounds (outside the view of the frame/panel)
+     * @param car the car to check.
+     * @return returns true if the car is either outside the bounds to the left or to the right.
+     */
     private boolean isOutOfBounds(Car car) {
         if (getMinX(car) < 0) {
             return true;
@@ -98,18 +101,19 @@ public class CarController {
         return false;
     }
 
+    /**
+     * Turns a car 180 degrees.
+     * @param car the car to turn around.
+     */
     private void turnAround(Car car) {
-        if (car.getX() > 0) {
             car.turnRight();
             car.turnRight();
-            //Checks out of bounds to the right
-        } else if (car.getX() < 0) {
-            car.turnRight();
-            car.turnRight();
-        }
-        //Checks out of bounds to the left
+
     }
 
+    /**
+     * Turns on the turbo for each of the compatible instantiated cars.
+     */
     // Calls the gas method for each car once
     void turboOn() {
         for (Car car : imageCarMap.keySet()) {
@@ -122,6 +126,10 @@ public class CarController {
         }
     }
 
+    /**
+     * Gases each of the instantiated cars.
+     * @param amount how much to gas the cars.
+     */
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : imageCarMap.keySet()) {
@@ -130,6 +138,11 @@ public class CarController {
         }
     }
 
+    /**
+     * Breaks all of the instantiated cars
+     *
+     * @param amount how much to break the cars.
+     */
     void brake(int amount) {
         double brake = ((double) amount / 100);
         for (Car car : imageCarMap.keySet()) {
@@ -137,17 +150,27 @@ public class CarController {
         }
     }
 
+    /**
+     * Stops each of the instantiated cars.
+     */
     void stopEngine() {
         for (Car car : imageCarMap.keySet()) {
             car.stopEngine();
         }
     }
 
+    /**
+     * Starts each of the instantiated cars.
+     */
     void startEngine() {
         for (Car car : imageCarMap.keySet()) {
             car.startEngine();
         }
     }
+
+    /**
+     * Lowers the flatbead of each Scania of the instantiated cars.
+     */
     void raiseFlatBed() {
         for (Car car : imageCarMap.keySet()) {
             try {
@@ -158,6 +181,10 @@ public class CarController {
             }
         }
     }
+
+    /**
+     * Lowers the flatbead of each Scania of the instantiated cars.
+     */
     void lowerFlatbed() {
         for (Car car : imageCarMap.keySet()) {
             try {

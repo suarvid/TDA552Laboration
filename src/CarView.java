@@ -23,7 +23,8 @@ public class CarView extends JFrame {
     private CarController carC;
 
     // This panel represent the animated part of the view with the car images.
-    private DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);
+    // Needs to be package private because has to be accessable from the Carcontroller.
+    DrawPanel drawPanel = new DrawPanel(frameWidth, frameHeight - 240);
 
     //This panel contains all the buttons and controls for the car simulation.
     private JPanel controlPanel = new JPanel();
