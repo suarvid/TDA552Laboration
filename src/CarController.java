@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -26,17 +25,13 @@ public class CarController {
 
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
-    // A list of cars, modify if needed
-    //ArrayList<Car> cars = new ArrayList<>();
+
     private Map<Car,BufferedImage> imageCarMap = new HashMap<>();
     private String imagesPath = "src//pics//";
     private String volvoImage = "Volvo240.jpg";
     private String saabImage = "Saab95.jpg";
     private String scaniaImage = "Scania.jpg";
 
-
-
-    //methods:
 
     public static void main(String[] args) {
         // Instance of this class
@@ -48,6 +43,7 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame.drawPanel.setHashMap(cc.imageCarMap);
 
         // Start the timer
         cc.timer.start();
@@ -76,8 +72,6 @@ public class CarController {
             for (Map.Entry<Car, BufferedImage> tuple : imageCarMap.entrySet()) {
                 Car car = tuple.getKey();
                 car.move();
-
-                frame.drawPanel.updatePanelObjects(car,tuple.getValue());
                 frame.drawPanel.repaint();
                 // repaint() calls the paintComponent method of the panel
                 if (isOutOfBounds(car)) {
@@ -152,6 +146,26 @@ public class CarController {
     void startEngine() {
         for (Car car : imageCarMap.keySet()) {
             car.startEngine();
+        }
+    }
+    void raiseFlatBed() {
+        for (Car car : imageCarMap.keySet()) {
+            try {
+                Scania scania = (Scania) car;
+                scania.raiseFlatbed();
+            } catch (ClassCastException cce) {
+
+            }
+        }
+    }
+    void lowerFlatbed() {
+        for (Car car : imageCarMap.keySet()) {
+            try {
+                Scania scania = (Scania) car;
+                scania.lowerFlatbed();
+            } catch (ClassCastException cce) {
+
+            }
         }
     }
 
