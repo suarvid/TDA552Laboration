@@ -129,8 +129,10 @@ public class CarController {
      * @param car the car to turn around.
      */
     private void turnAround(Car car) {
-            car.turnRight();
-            car.turnRight();
+        car.stopEngine();
+        car.turnRight();
+        car.turnRight();
+        car.startEngine();
 
     }
 
