@@ -118,7 +118,7 @@ public class CarController {
     private boolean isOutOfBounds(Car car) {
         if (getMinX(car) < 0) {
             return true;
-        } else if (getMaxX(car) > frame.getX()) {
+        } else if (getMaxX(car) > frame.getFrameWidth()) {
             return true;
         }
         return false;
