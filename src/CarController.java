@@ -13,9 +13,9 @@ import java.util.Map;
  * It's responsibilities is to listen to the View and responds in a appropriate manner by
  * modifying the model state and the updating the view.
  *
- *  @author Matte B, Arre S, Alle V, Alex G
- *  @version 1.0
- *  @since 2018-11-29
+ * @author Matte B, Arre S, Alle V, Alex G
+ * @version 1.0
+ * @since 2018-11-29
  */
 
 public class CarController {
@@ -42,9 +42,9 @@ public class CarController {
         CarController cc = new CarController();
 
         //maps cars with respective image
-        cc.createVehicle(new Volvo240(0,0),cc.volvoImage);
-        cc.createVehicle(new Saab95(0,100),cc.saabImage);
-        cc.createVehicle(new Scania(0,200),cc.scaniaImage);
+        cc.createVehicle(new Volvo240(0, 0), cc.volvoImage);
+        cc.createVehicle(new Saab95(0, 100), cc.saabImage);
+        cc.createVehicle(new Scania(0, 200), cc.scaniaImage);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -56,44 +56,46 @@ public class CarController {
 
     /**
      * Creates a image from filename if possible and maps car with image.
-     * @param car the car to map
+     *
+     * @param car      the car to map
      * @param filename the filname of the image file to map
      */
-    private void createVehicle(Car car, String filename){
+    private void createVehicle(Car car, String filename) {
         try {
             BufferedImage image = ImageIO.read(new File(imagesPath + filename));
-            imageCarMap.put(car,image);
+            imageCarMap.put(car, image);
             System.out.println(image);
 
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
 
-
     /**
      * Moves all the cars in the list and tells the
      * view to update its images.
-     * */
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             for (Map.Entry<Car, BufferedImage> tuple : imageCarMap.entrySet()) {
                 Car car = tuple.getKey();
-                car.move();
-                frame.drawPanel.repaint();
-                // repaint() calls the paintComponent method of the panel
+
                 if (isOutOfBounds(car)) {
-                    turnAround(car);
+                    turnHorizontally(car);
+                }else{
+                    car.move();
                 }
+                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.repaint();
             }
         }
     }
 
     /**
      * Calculate the x-coordinate for the image's most right corner.
+     *
      * @param car the car that maps with the image.
      * @return the x-coordinate for image's most right corner.
      */
@@ -103,6 +105,7 @@ public class CarController {
 
     /**
      * Returns the x-coordinate for car's image's most left corner.
+     *
      * @param car the car that maps with the image.
      * @return the x-coordinate for car's image's most left corner.
      */
@@ -112,6 +115,7 @@ public class CarController {
 
     /**
      * Controls whether a car is out of bounds (outside the view of the frame/panel)
+     *
      * @param car the car to check.
      * @return returns true if the car is either outside the bounds to the left or to the right.
      */
@@ -126,15 +130,29 @@ public class CarController {
 
     /**
      * Turns a car 180 degrees.
+     *
      * @param car the car to turn around.
      */
-    private void turnAround(Car car) {
+    private void turnHorizontally(Car car) {
+
         car.stopEngine();
-        car.turnRight();
-        car.turnRight();
         car.startEngine();
+        unstickCar(car);
+
+        car.turnRight();
+        car.turnRight();
 
     }
+
+    private void unstickCar(Car car){
+        int carDirection = frame.drawPanel.getDirectionSign(car);
+        while(isOutOfBounds(car)){
+            car.setPosition(car.getX() - carDirection, car.getY());
+        }
+
+    }
+
+
 
     /**
      * Turns on the turbo for each of the compatible instantiated cars.
@@ -153,6 +171,7 @@ public class CarController {
 
     /**
      * Gases each of the instantiated cars.
+     *
      * @param amount how much to gas the cars.
      */
     void gas(int amount) {
